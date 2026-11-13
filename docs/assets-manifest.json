@@ -198,7 +198,7 @@
       "height": 1254,
       "mode": "RGB",
       "has_alpha_channel": false,
-      "bytes": 0,
+      "bytes": 1984726,
       "sha256_source": "fa26180a299ba52c01284b27d23774d19cbc178966edc1eab676420d978811b9",
       "sha256_destination": "b4c6dc3770114f5a26be6e8b2d0dde4a19f206161e0bb279362963ef0e445898",
       "bytes_verified_equal": false,
