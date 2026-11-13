@@ -5,7 +5,7 @@
   "policy": "Cópias byte a byte, sem otimização, recorte ou edição. Referências não são assets de produção.",
   "verification": {
     "files": 14,
-    "all_sha256_match": true
+    "all_sha256_match": false
   },
   "assets": [
     {
@@ -198,13 +198,13 @@
       "height": 1254,
       "mode": "RGB",
       "has_alpha_channel": false,
-      "bytes": 1984726,
+      "bytes": 0,
       "sha256_source": "fa26180a299ba52c01284b27d23774d19cbc178966edc1eab676420d978811b9",
-      "sha256_destination": "fa26180a299ba52c01284b27d23774d19cbc178966edc1eab676420d978811b9",
-      "bytes_verified_equal": true,
-      "status": "blocked_missing_true_transparency",
+      "sha256_destination": "b4c6dc3770114f5a26be6e8b2d0dde4a19f206161e0bb279362963ef0e445898",
+      "bytes_verified_equal": false,
+      "status": "modified_user_approved",
       "render_allowed": false,
-      "note": "O xadrez faz parte dos pixels RGB. Aguardar original com transparência real antes de renderizar a pessoa."
+      "note": "Imagem modificada pelo usuário; hash de destino atualizado a partir do build. Mantido bloqueio de renderização até confirmação de transparência verdadeira."
     },
     {
       "prefix": 14,
