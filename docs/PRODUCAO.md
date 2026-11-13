@@ -33,11 +33,11 @@ Gere o inventário após o build final. Um novo build pode alterar hashes e nome
 
 ## Contrato da hospedagem
 
-A configuração atual exige servir a aplicação na raiz do domínio (`<base href="/">` e imagens em `/assets/`). Não publicar em subdiretório sem adaptar essas referências e validar novamente as duas rotas.
+No GitHub Pages deste repositório, a aplicação é servida em `/3d-flash/`. O build usa `<base href="/3d-flash/">` e as imagens usam caminhos relativos (`assets/...`) para permanecerem dentro desse subdiretório.
 
-1. Enviar o **conteúdo** de dist/ para a raiz pública do site, incluindo assets/ e 3rdpartylicenses.txt.
+1. O workflow publica o **conteúdo** de dist/ no Pages, incluindo assets/ e 3rdpartylicenses.txt.
 2. Servir JS como JavaScript, CSS como CSS e PNG como imagem. Usar HTTPS no destino definitivo.
-3. Devolver index.html para navegações SPA, incluindo acesso direto e atualização de `/curso`.
+3. A navegação usa hash routing (`/#/` e `/#/curso`), evitando exigir fallback de SPA no servidor estático.
 4. Recursos estáticos inexistentes precisam retornar 404; não devolver HTML como resposta de um bundle JS/CSS ausente.
 5. Revalidar index.html a cada publicação. Bundles com hash podem ter cache prolongado; as imagens têm nomes estáveis e não devem receber cache imutável sem versionamento.
 6. Abrir `/`, `/curso` diretamente e uma rota inexistente após publicar. Conferir console, rede, links e scroll nos dois sentidos no servidor real.
