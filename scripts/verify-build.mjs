@@ -34,7 +34,7 @@ async function walk(path) {
 
 const index = await readFile(await requireFile('index.html'), 'utf8');
 if (!/<html\b[^>]*lang="pt-BR"/i.test(index)) fail('Idioma pt-BR ausente.');
-if (!/<base\s+href="\/"/i.test(index)) fail('O pacote de publicação requer hospedagem na raiz.');
+if (!/<base\s+href="\/"/i.test(index)) fail('O pacote de publicação requer base href /3d-flash/ no GitHub Pages.');
 if (!/<meta\s+name="description"\s+content="[^"]+"/i.test(index)) fail('Descrição ausente.');
 const entryReferences = [...index.matchAll(/\b(?:src|href)="([^"?#]+\.(?:js|css))"/g)].map(
   (match) => match[1],
