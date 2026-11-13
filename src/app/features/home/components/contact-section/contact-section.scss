@@ -1,0 +1,110 @@
+:host {
+  display: block;
+}
+
+.contact-inner {
+  max-inline-size: 72rem;
+  padding-block-start: clamp(2.5rem, 4vw, 4.5rem);
+  padding-inline: max(var(--page-gutter), var(--keychain-route-corridor, 0px));
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(1rem, 4vw, 4rem);
+}
+
+.contact-copy {
+  min-inline-size: 0;
+}
+
+.display-heading {
+  margin-block-end: 0;
+  font-size: clamp(1.2rem, 4.3vw, 3rem);
+  line-height: 1.04;
+
+  > span {
+    display: block;
+  }
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 2.5vw, 2rem);
+  border-inline-start: 2px solid var(--color-cyan);
+  padding-inline-start: clamp(0.75rem, 5vw, 4rem);
+  padding-block: 0.15rem;
+}
+
+.social-button {
+  display: grid;
+  place-items: center;
+  inline-size: clamp(2.75rem, 8vw, 6rem);
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  border-radius: 26%;
+  color: var(--color-text);
+  box-shadow:
+    inset 0 2px 3px rgb(255 255 255 / 35%),
+    0 0 1.5rem rgb(2 9 29 / 60%);
+
+  svg {
+    inline-size: 76%;
+    block-size: 76%;
+    overflow: visible;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 1;
+  }
+}
+
+// Provisional CSS/SVG presentations until the separate 3D social assets are supplied.
+.social-button--instagram {
+  background: var(--gradient-instagram);
+}
+
+.social-button--whatsapp {
+  background: var(--gradient-whatsapp);
+}
+
+.keychain-formation {
+  inline-size: 100%;
+  min-block-size: max(clamp(4rem, 7.5vw, 7rem), var(--keychain-arrival-height, 0px));
+  margin-block-start: 1rem;
+}
+
+@media (max-width: 30rem) {
+  .contact-layout {
+    gap: 0.75rem;
+  }
+
+  .social-links {
+    gap: 0.5rem;
+    padding-inline-start: 0.75rem;
+  }
+
+  .social-button {
+    inline-size: 2.75rem;
+  }
+}
+
+@media (max-width: 22rem) {
+  .contact-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .social-links {
+    justify-self: end;
+    gap: 0.4rem;
+    padding-inline-start: 0.6rem;
+  }
+
+  .social-button {
+    inline-size: 2.75rem;
+  }
+}

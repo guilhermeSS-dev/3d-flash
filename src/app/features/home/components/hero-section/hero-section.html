@@ -1,0 +1,35 @@
+<section id="inicio" class="hero-section" aria-labelledby="hero-title" tabindex="-1">
+  <header class="hero-header section-inner">
+    <img
+      class="brand-logo"
+      [src]="assets.logo"
+      alt="3D Flash — Impressão 3D"
+      width="2169"
+      height="725"
+      fetchpriority="high"
+    />
+  </header>
+  <div class="hero-inner section-inner">
+    <div class="hero-copy">
+      <div class="hero-copy-content" data-keychain-obstacle="hero-copy">
+        <h1 id="hero-title" class="hero-title">
+          <span>Transforme sua</span>
+          <span>imaginação em</span>
+          <span class="hero-emphasis accent-text">realidade.</span>
+        </h1>
+        <p class="hero-subtitle">
+          Da ideia digital à criação física. Descubra novas possibilidades com a impressão 3D.
+        </p>
+        <app-primary-button icon="course">Conheça nosso curso</app-primary-button>
+      </div>
+    </div>
+    <div class="hero-scene" data-keychain-origin-surface>
+      <div class="person-slot" data-person-slot aria-hidden="true">
+        @if (assets.person.renderAllowed) {
+          <img [src]="assets.person.src" alt="" width="1254" height="1254" />
+        }
+      </div>
+      <app-floating-keychains />
+    </div>
+  </div>
+</section>

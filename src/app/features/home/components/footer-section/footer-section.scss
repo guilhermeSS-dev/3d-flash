@@ -1,0 +1,45 @@
+:host {
+  display: block;
+}
+
+.footer-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+  align-items: center;
+  gap: clamp(1.25rem, 6vw, 4.5rem);
+  max-inline-size: 58rem;
+  padding-block: clamp(2.5rem, 6vw, 6rem);
+}
+
+.footer-logo {
+  inline-size: min(100%, 19rem);
+  justify-self: end;
+}
+
+.footer-copy {
+  display: grid;
+  align-content: center;
+  gap: 0.15rem;
+  min-block-size: 3rem;
+  margin: 0;
+  border-inline-start: 2px solid var(--color-text);
+  padding-inline-start: clamp(1rem, 6vw, 4.5rem);
+  font-size: clamp(0.75rem, 1.65vw, 1.2rem);
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+
+  strong {
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 30rem) {
+  .footer-layout {
+    gap: 1.15rem;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  }
+
+  .footer-copy {
+    padding-inline-start: 1rem;
+  }
+}

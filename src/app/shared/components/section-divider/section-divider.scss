@@ -1,0 +1,37 @@
+:host {
+  display: block;
+  position: absolute;
+  z-index: var(--layer-decorations);
+  inset-inline: 0;
+  inset-block-end: -1.5rem;
+  block-size: clamp(3rem, 7vw, 6rem);
+  pointer-events: none;
+}
+svg {
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: visible;
+}
+path {
+  vector-effect: non-scaling-stroke;
+}
+.wave-halo {
+  stroke: var(--color-wave);
+  stroke-width: 10;
+  opacity: 0.45;
+  filter: blur(6px);
+}
+.wave-body {
+  stroke: var(--color-wave);
+  stroke-width: 3;
+  filter: drop-shadow(0 0 5px var(--color-wave));
+}
+.wave-core {
+  stroke: var(--color-cyan);
+  stroke-width: 1.5;
+}
+.wave-warm {
+  stroke: var(--color-lightning);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 7px var(--color-orange));
+}

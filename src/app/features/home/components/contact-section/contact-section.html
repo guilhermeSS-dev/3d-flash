@@ -1,0 +1,75 @@
+<section id="contato" class="contact" aria-labelledby="contact-heading" tabindex="-1">
+  <div class="section-inner contact-inner">
+    <div class="contact-layout">
+      <div class="contact-copy" data-keychain-obstacle="contact-copy">
+        <p class="section-label">CONTATO</p>
+        <h2 id="contact-heading" class="display-heading">
+          <span>Sua próxima grande</span>
+          <span>ideia <span class="accent-text">começa aqui.</span></span>
+        </h2>
+      </div>
+
+      <div
+        class="social-links"
+        role="group"
+        aria-label="Redes sociais da 3D Flash"
+        data-keychain-obstacle="contact-social"
+      >
+        @for (social of socialLinks; track social.id) {
+          @if (social.url) {
+            <a
+              [class]="'social-button social-button--' + social.id"
+              [href]="social.url"
+              [attr.aria-label]="social.label + ' (abre em uma nova aba)'"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ng-container
+                [ngTemplateOutlet]="socialIcon"
+                [ngTemplateOutletContext]="{ $implicit: social.id }"
+              />
+            </a>
+          } @else {
+            <button
+              type="button"
+              [class]="'social-button social-button--' + social.id"
+              [attr.aria-label]="social.label + ' — link ainda não disponível'"
+              title="Link ainda não disponível"
+              disabled
+            >
+              <ng-container
+                [ngTemplateOutlet]="socialIcon"
+                [ngTemplateOutletContext]="{ $implicit: social.id }"
+              />
+            </button>
+          }
+        }
+      </div>
+    </div>
+
+    <div class="keychain-formation" data-keychain-formation aria-hidden="true"></div>
+  </div>
+</section>
+
+<ng-template #socialIcon let-platform>
+  @if (platform === 'instagram') {
+    <svg viewBox="0 0 64 64" fill="none" aria-hidden="true" focusable="false">
+      <rect x="10" y="10" width="44" height="44" rx="13" stroke="currentColor" stroke-width="4" />
+      <circle cx="32" cy="32" r="11" stroke="currentColor" stroke-width="4" />
+      <circle cx="46" cy="18" r="3" fill="currentColor" />
+    </svg>
+  } @else {
+    <svg viewBox="0 0 64 64" fill="none" aria-hidden="true" focusable="false">
+      <path
+        d="M51 12a26 26 0 0 0-40 32L7 58l15-4A26 26 0 0 0 51 12Z"
+        stroke="currentColor"
+        stroke-width="3.7"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M24 18c-1-1-3-1-4 1-2 3-2 6-1 9 4 9 10 15 19 18 3 1 6 0 8-2l2-4c0-1-1-2-2-2l-6-3c-1 0-2 0-3 2l-2 2c-4-2-8-5-10-10l2-2c1-1 1-2 0-3l-3-6Z"
+        fill="currentColor"
+      />
+    </svg>
+  }
+</ng-template>

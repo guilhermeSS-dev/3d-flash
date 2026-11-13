@@ -1,0 +1,115 @@
+:host {
+  display: block;
+}
+.hero-section {
+  position: relative;
+}
+.hero-header {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 30;
+  padding-block-start: clamp(0.5rem, 1.3vw, 1.5rem);
+  pointer-events: none;
+  padding-inline-end: max(
+    var(--page-gutter),
+    calc(var(--navigation-control-size) + var(--navigation-edge) + 16px)
+  );
+}
+.brand-logo {
+  inline-size: clamp(10rem, 25vw, 21rem);
+}
+.hero-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.43fr) minmax(0, 0.57fr);
+  align-items: center;
+  min-block-size: clamp(33rem, 52vw, 47rem);
+}
+.hero-copy {
+  position: relative;
+  z-index: 30;
+  padding-block: 6.5rem 3rem;
+}
+.hero-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4.15vw, 3.5rem);
+  font-style: italic;
+  font-weight: 900;
+  line-height: 0.99;
+  letter-spacing: -0.045em;
+  overflow-wrap: anywhere;
+}
+.hero-title > span {
+  display: block;
+}
+.hero-title .hero-emphasis {
+  margin-block-start: 0.025em;
+  font-size: 1.98em;
+  line-height: 1.1;
+  letter-spacing: -0.06em;
+}
+.hero-subtitle {
+  max-inline-size: 35ch;
+  margin-block: 0.65rem 1.7rem;
+  font-size: clamp(1rem, 1.95vw, 1.55rem);
+  line-height: 1.2;
+}
+.hero-scene {
+  position: relative;
+  align-self: stretch;
+  min-inline-size: 0;
+}
+.person-slot {
+  position: absolute;
+  inset: 7% -2% 0 -5%;
+}
+.person-slot img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+  object-position: bottom;
+}
+
+@media (max-width: 63.99rem) and (min-width: 48rem) {
+  .hero-inner {
+    min-block-size: 31rem;
+  }
+  .hero-title {
+    font-size: clamp(1.8rem, 3.9vw, 2.6rem);
+  }
+}
+@media (max-width: 47.99rem) {
+  .hero-inner {
+    grid-template-columns: minmax(0, 1fr);
+    min-block-size: 0;
+    padding-block-end: 2.75rem;
+  }
+  .hero-scene {
+    grid-row: 1;
+    aspect-ratio: 1.13;
+    min-block-size: 15rem;
+  }
+  .hero-copy {
+    grid-row: 2;
+    padding-block: 0;
+    margin-block-start: 0;
+    text-align: center;
+    padding-inline: max(0px, calc(var(--keychain-route-corridor, 0px) - var(--page-gutter)));
+  }
+  .hero-title {
+    font-size: clamp(1.85rem, 5.7vw, 2.8rem);
+  }
+  .hero-title .hero-emphasis {
+    font-size: 1.86em;
+  }
+  .hero-subtitle {
+    margin: 0.5rem auto 1rem;
+    font-size: clamp(1rem, 3vw, 1.3rem);
+  }
+  .brand-logo {
+    inline-size: clamp(7rem, 35vw, 16rem);
+  }
+  .person-slot {
+    inset: 8% -6% -10%;
+  }
+}

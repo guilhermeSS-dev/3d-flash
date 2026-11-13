@@ -1,0 +1,37 @@
+<div class="course-accordion">
+  @for (module of modules(); track module.id; let index = $index) {
+    <div class="module" [class.module--expanded]="isExpanded(module.id)">
+      <h3 class="module-heading">
+        <button
+          #moduleTrigger
+          class="module-trigger"
+          type="button"
+          [id]="'course-' + module.id + '-trigger'"
+          [attr.aria-expanded]="isExpanded(module.id)"
+          [attr.aria-controls]="'course-' + module.id + '-panel'"
+          (click)="toggle(module.id)"
+          (keydown)="navigateHeaders($event, index)"
+        >
+          <span>{{ module.title }}</span>
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+            <path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </button>
+      </h3>
+
+      <div
+        class="module-panel"
+        [class.module-panel--expanded]="isExpanded(module.id)"
+        [id]="'course-' + module.id + '-panel'"
+        role="region"
+        [attr.aria-labelledby]="'course-' + module.id + '-trigger'"
+        [attr.aria-hidden]="!isExpanded(module.id)"
+        [attr.inert]="isExpanded(module.id) ? null : ''"
+      >
+        <div class="module-panel-inner">
+          <p class="module-description">{{ module.description }}</p>
+        </div>
+      </div>
+    </div>
+  }
+</div>

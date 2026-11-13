@@ -1,0 +1,52 @@
+// Initial samples from the desktop PNG; validate gradients in stage 2.
+:root {
+  --color-background: #000f2c;
+  --color-background-lit: #001c52;
+  --color-background-deep: #000d32;
+  --color-cyan: #06f4fc;
+  --color-orange: #f94a02;
+  --color-text: #fff;
+  --color-course-muted: #bcc9df;
+  --color-course-border: rgb(6 244 252 / 30%);
+
+  // Provisional: original font and exact lightning token were not supplied.
+  --color-lightning: #ffd500;
+  // Provisional decorative gradients, matched approximately to the flattened PNGs.
+  --color-wave: #007bff;
+  --color-button-edge: #ffbf27;
+  --gradient-accent: linear-gradient(180deg, #fff000 3%, #ffd500 40%, #ff7800 100%);
+  // Keep bright edges, with a darker central band for readable white button labels.
+  --gradient-button: linear-gradient(
+    180deg,
+    #ffad1a 0%,
+    #f17800 11%,
+    #b43c00 24% 76%,
+    #ffb400 100%
+  );
+  --gradient-instagram: radial-gradient(
+    circle at 26% 108%,
+    #ffdb6b 0 12%,
+    #ff7532 31%,
+    #f32f75 51%,
+    #b22ef0 70%,
+    #5a67e9 100%
+  );
+  --gradient-whatsapp: linear-gradient(145deg, #77ff52, #0bda28 45%, #00a418 79%, #007b12);
+  --font-body: system-ui, sans-serif;
+  --font-heading: var(--font-body);
+
+  // Fluid scaffolding; final section geometry is validated in stages 2 and 4.
+  --content-max-width: 80rem;
+  --page-gutter: clamp(1.25rem, 4vw, 4rem);
+  --section-spacing: clamp(3rem, 6vw, 6rem);
+  --text-body-size: clamp(1rem, 0.95rem + 0.2vw, 1.2rem);
+
+  --layer-base: 0;
+  --layer-decorations: 10;
+  --layer-electricity: 19;
+  --layer-keychains: 20;
+  --layer-menu: 100;
+  --navigation-control-size: clamp(56px, 7.5vw, 80px);
+  --navigation-edge: clamp(12px, 2.5vw, 32px);
+  --layer-focus: 200;
+}

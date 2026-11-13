@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "build_directory": "dist",
+  "verification": "static_artifacts_only",
+  "entry_references": ["styles-B5RRQWRT.css", "main-Z6RFMWDT.js"],
+  "chunk_references_verified": 4,
+  "original_assets_verified": 12,
+  "files": [
+    {
+      "file": "3rdpartylicenses.txt",
+      "bytes": 17127,
+      "sha256": "debdf9da7f418bd5a13258916a3eeb50fbedc75a3cb9b0479bb387d7e6b5fe34"
+    },
+    {
+      "file": "assets/icons/menu-raios.png",
+      "bytes": 1506696,
+      "sha256": "0e3dc1efdc6d4fcb5b35724df41e4ee8e93b070b4ca6b5e83173d74c7503de81"
+    },
+    {
+      "file": "assets/images/capinha-digital.png",
+      "bytes": 1641171,
+      "sha256": "8387ce927f8ccfcda14def0010c19fd1ea6559d4497100c7f4a3c80acdee9508"
+    },
+    {
+      "file": "assets/images/capinha-fisica.png",
+      "bytes": 1804868,
+      "sha256": "e02f3bb6474f0bca8ff131f60882bef36742eb3bee52e2e867122c417d1a5d55"
+    },
+    {
+      "file": "assets/images/logo.png",
+      "bytes": 1311709,
+      "sha256": "6acc04d6c99267e356b4856f5040f3aaab46ccbd78c0ccddcb245053fc076795"
+    },
+    {
+      "file": "assets/images/pessoa-original.png",
+      "bytes": 1984726,
+      "sha256": "fa26180a299ba52c01284b27d23774d19cbc178966edc1eab676420d978811b9"
+    },
+    {
+      "file": "assets/images/plaquinha-qr.png",
+      "bytes": 1400054,
+      "sha256": "70c1dc6958021c13690f72f6f41feebf05c360ee6b0df687b94dbc52934bdf7d"
+    },
+    {
+      "file": "assets/keychains/brasileira-acai.png",
+      "bytes": 1111608,
+      "sha256": "5f43afc71d7b851f9b977ae13d4e92f5d9517efd5379d364f774d95d098c45d5"
+    },
+    {
+      "file": "assets/keychains/e4kc-motorsport.png",
+      "bytes": 1414974,
+      "sha256": "060b1076d02fb803c01456d4a775d623dbaf5cf4dc4e3a9ea856cb52d934e002"
+    },
+    {
+      "file": "assets/keychains/leca-tintas.png",
+      "bytes": 1004056,
+      "sha256": "871bfbfc5e81cac8ea5dcea132ddefba01f486398cbd5b2396c996ec9cd155d0"
+    },
+    {
+      "file": "assets/keychains/ro-cabelos.png",
+      "bytes": 1359966,
+      "sha256": "026084bd5ddc878dd048e8ee743094ad32e2036e1411d7afda1596e8823f9827"
+    },
+    {
+      "file": "assets/keychains/ro-modas.png",
+      "bytes": 673077,
+      "sha256": "3d6c24d73dd100921c4525c0b4a6da4ebc8fa8942d0ee3fcc4cc66b327a6af23"
+    },
+    {
+      "file": "assets/keychains/v-motos-racing.png",
+      "bytes": 1498051,
+      "sha256": "03ee9b366fcb6768b9feedc3bea6d6144e08c5034b9b6a3b79d0a11bb39f6660"
+    },
+    {
+      "file": "chunk-BdAzcOnP.js",
+      "bytes": 11483,
+      "sha256": "25889b369e90de195e2c23222a2c146e4654d41d2edc5884d7f7d7c007c3b23f"
+    },
+    {
+      "file": "chunk-BjPme28M.js",
+      "bytes": 184998,
+      "sha256": "cd931835856eba9a6d964432a89c4db49fd9aefe314b6feb3a1ac06f8b4504f6"
+    },
+    {
+      "file": "chunk-CExmOGkq.js",
+      "bytes": 1440,
+      "sha256": "50aca89c2ec0f8f846efb14cbe2408a5006be360b7feb05d797e4f80a51f5a6d"
+    },
+    {
+      "file": "index.html",
+      "bytes": 2297,
+      "sha256": "73760deed19bf274af3ceba76be2172621fbd4caedc5abf125d7224124a5ce14"
+    },
+    {
+      "file": "main-Z6RFMWDT.js",
+      "bytes": 237194,
+      "sha256": "2e4f42ff4daf6b53719a76d83b055892746865388ce49544b610ef31a424abde"
+    },
+    {
+      "file": "styles-B5RRQWRT.css",
+      "bytes": 3123,
+      "sha256": "90af88a9fe633bc4b8ba74b3bffe6899c1b4583eb77130cf91605a6bf756bc9c"
+    }
+  ]
+}

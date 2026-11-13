@@ -1,0 +1,11 @@
+@if (externalUrl(); as url) {
+  <a class="enrollment-button" [href]="url" target="_blank" rel="noopener noreferrer">
+    Quero me inscrever no curso
+    <span class="sr-only"> (abre em uma nova aba)</span>
+  </a>
+} @else {
+  <button class="enrollment-button" type="button" title="Inscrições ainda não disponíveis" disabled>
+    Quero me inscrever no curso
+  </button>
+  <p class="enrollment-status">Inscrições ainda não disponíveis.</p>
+}

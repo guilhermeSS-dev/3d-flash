@@ -1,0 +1,42 @@
+{
+  "name": "3d-flash",
+  "version": "0.1.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "dev": "ng serve --host 0.0.0.0",
+    "test:ci": "ng test --watch=false",
+    "format:check": "prettier --check src scripts docs README.md angular.json package.json tsconfig*.json",
+    "verify:build": "node scripts/verify-build.mjs",
+    "release:check": "npm run format:check && npm run test:ci && npm run build && npm run verify:build"
+  },
+  "private": true,
+  "packageManager": "npm@11.9.0",
+  "dependencies": {
+    "@angular/common": "22.2.6",
+    "@angular/compiler": "22.2.6",
+    "@angular/core": "22.2.6",
+    "@angular/platform-browser": "22.2.6",
+    "@angular/router": "22.2.6",
+    "git": "^0.1.5",
+    "gsap": "3.15.1",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/build": "22.2.7",
+    "@angular/cli": "22.2.7",
+    "@angular/compiler-cli": "22.2.6",
+    "jsdom": "^30.0.0",
+    "prettier": "^3.8.1",
+    "typescript": "~6.0.2",
+    "vitest": "^5.0.0"
+  },
+  "engines": {
+    "node": "^22.22.3 || ^24.15.0 || >=26.0.0",
+    "npm": ">=11.0.0"
+  }
+}

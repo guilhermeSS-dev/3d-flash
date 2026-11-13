@@ -1,0 +1,21 @@
+:host {
+  position: absolute;
+  inset: 0;
+  display: block;
+  z-index: var(--layer-electricity);
+  pointer-events: none;
+}
+
+svg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce), (forced-colors: active) {
+  :host {
+    display: none;
+  }
+}

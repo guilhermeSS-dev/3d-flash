@@ -1,0 +1,18 @@
+<div class="course-info">
+  <p class="section-label">CURSO 3D FLASH</p>
+  <h1 id="course-title">{{ presentation().name || 'Curso 3D Flash' }}</h1>
+  @if (!presentation().name) {
+    <p class="pending-note">Nome definitivo em breve.</p>
+  }
+  <dl class="course-duration">
+    <div>
+      <dt>Duração</dt>
+      <dd [class.is-placeholder]="!presentation().duration">
+        {{ presentation().duration || 'A definir' }}
+      </dd>
+    </div>
+  </dl>
+  <p class="course-introduction" [class.is-placeholder]="!presentation().introduction">
+    {{ presentation().introduction || 'Descrição do curso em breve.' }}
+  </p>
+</div>

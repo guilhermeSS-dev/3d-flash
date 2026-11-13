@@ -1,0 +1,120 @@
+:host {
+  display: block;
+}
+
+.course-preview-section {
+  position: relative;
+  isolation: isolate;
+}
+
+.course-inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(1rem, 0.9fr) minmax(0, 1.6fr) minmax(10rem, 1fr);
+  grid-template-rows: 1fr auto;
+  gap: 0.25rem 1rem;
+  align-items: start;
+  min-block-size: clamp(23rem, 34vw, 30rem);
+  padding-block: 2.75rem 3.5rem;
+  padding-inline: max(var(--page-gutter), var(--keychain-route-corridor, 0px));
+}
+
+.course-copy {
+  grid-column: 2;
+  grid-row: 1;
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+  padding-block-start: 0.6rem;
+
+  .section-label {
+    justify-content: center;
+  }
+}
+
+.accent-text {
+  display: block;
+}
+
+.course-product {
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: end;
+  align-self: center;
+  inline-size: min(100%, clamp(12rem, 22vw, 18rem));
+  margin: 0;
+  filter: drop-shadow(0 0 1.25rem var(--color-orange));
+
+  img {
+    inline-size: 100%;
+    block-size: auto;
+  }
+}
+
+.course-action {
+  grid-column: 2 / -1;
+  grid-row: 2;
+  justify-self: end;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  margin-inline-end: 1rem;
+}
+
+// Keep the transformation in the reserved corridor as a grid item, including with enlarged text.
+.case-transformation-slot {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  justify-self: center;
+  align-self: center;
+  block-size: clamp(7rem, 18vw, 13rem);
+  aspect-ratio: 603 / 1294;
+  max-inline-size: 100%;
+  pointer-events: none;
+}
+
+@media (min-width: 48rem) and (max-width: 63.99rem) {
+  .course-inner {
+    grid-template-columns: minmax(5rem, 0.7fr) minmax(0, 1.6fr) minmax(8rem, 1fr);
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .course-inner {
+    grid-template-columns: minmax(0, 0.35fr) minmax(0, 0.65fr);
+    grid-template-rows: auto 1fr auto;
+    gap: 0;
+    min-block-size: 0;
+    padding-block: 1.75rem 2.75rem;
+  }
+
+  .course-copy {
+    grid-column: 1 / -1;
+    justify-self: end;
+    max-inline-size: 34rem;
+    text-align: end;
+    padding-block-start: 0;
+
+    .section-label {
+      justify-content: flex-end;
+    }
+  }
+
+  .course-product {
+    grid-column: 2;
+    grid-row: 2;
+    inline-size: clamp(8rem, 36vw, 15rem);
+    margin-inline-end: clamp(0rem, 4vw, 2rem);
+    margin-block: -0.25rem 0;
+  }
+
+  .course-action {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    margin-inline-end: 0;
+  }
+
+  .case-transformation-slot {
+    grid-column: 1;
+    grid-row: 2;
+    block-size: clamp(6.5rem, 28vw, 11rem);
+  }
+}

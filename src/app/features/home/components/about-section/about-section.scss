@@ -1,0 +1,122 @@
+:host {
+  display: block;
+}
+
+.about-section {
+  position: relative;
+  isolation: isolate;
+}
+
+.about-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  align-items: center;
+  gap: clamp(1rem, 3vw, 3rem);
+  min-block-size: clamp(19rem, 28vw, 25rem);
+  padding-block: 2.25rem 3.25rem;
+  padding-inline: max(var(--page-gutter), var(--keychain-route-corridor, 0px));
+}
+
+.about-copy {
+  min-inline-size: 0;
+}
+
+.accent-text {
+  display: block;
+}
+
+.about-visual {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(2rem, 0.35fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(0.25rem, 1vw, 1rem);
+  inline-size: 100%;
+  max-inline-size: 38rem;
+  justify-self: end;
+}
+
+.case-display {
+  --case-glow: var(--color-cyan);
+  position: relative;
+  min-inline-size: 0;
+  margin: 0;
+  padding-block-end: 0.65rem;
+
+  img {
+    position: relative;
+    z-index: 1;
+    inline-size: 100%;
+    block-size: clamp(12rem, 21vw, 18rem);
+    object-fit: contain;
+    filter: drop-shadow(0 0 0.55rem var(--case-glow));
+  }
+}
+
+.case-display--physical {
+  --case-glow: var(--color-orange);
+}
+
+// Provisional decorative geometry: the original pedestal images were not supplied.
+.case-pedestal {
+  position: absolute;
+  inset-inline: 5%;
+  inset-block-end: 0.6rem;
+  block-size: clamp(0.8rem, 1.7vw, 1.4rem);
+  border: 1px solid var(--case-glow);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, var(--case-glow), var(--color-background-lit) 65%);
+  box-shadow: 0 0 1.1rem var(--case-glow);
+  pointer-events: none;
+}
+
+.conversion-arrows {
+  inline-size: 100%;
+  max-inline-size: 4rem;
+  justify-self: center;
+  color: var(--color-orange);
+  filter: drop-shadow(0 0 0.35rem currentColor);
+
+  path {
+    stroke: currentColor;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+@media (max-width: 63.99rem) {
+  .about-inner {
+    gap: 0.75rem;
+  }
+
+  .case-display img {
+    block-size: clamp(10rem, 24vw, 16rem);
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .about-inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.5rem;
+    min-block-size: 0;
+    padding-block: 1.75rem 2.5rem;
+  }
+
+  .about-copy {
+    max-inline-size: 30rem;
+  }
+
+  .about-visual {
+    inline-size: min(80%, 27rem);
+    justify-self: start;
+    margin-inline-start: 1%;
+  }
+
+  .case-display img {
+    block-size: clamp(8rem, 33vw, 13rem);
+  }
+
+  .case-pedestal {
+    inset-inline: 4%;
+  }
+}

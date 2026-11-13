@@ -1,0 +1,76 @@
+:host {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: var(--layer-keychains);
+  pointer-events: none;
+}
+.keychain-plane {
+  position: absolute;
+  inset: 0;
+}
+.keychain {
+  position: absolute;
+  inline-size: 12%;
+}
+.keychain-float {
+  position: relative;
+  inline-size: 100%;
+  block-size: 100%;
+  transform-origin: 50% 50%;
+}
+.keychain img {
+  position: absolute;
+  max-inline-size: none;
+  block-size: auto;
+}
+.keychain--ro-modas {
+  inset: 12% auto auto 4%;
+  rotate: 13deg;
+}
+.keychain--ro-cabelos {
+  inset: 12% auto auto 24%;
+  rotate: 10deg;
+}
+.keychain--brasileira-acai {
+  inset: 37% auto auto 3%;
+  rotate: -13deg;
+  inline-size: 12%;
+}
+.keychain--leca-tintas {
+  inset: 37% auto auto 23%;
+  rotate: 16deg;
+  inline-size: 16%;
+}
+.keychain--e4kc-motorsport {
+  inset: 59% auto auto 7%;
+  rotate: 70deg;
+  inline-size: 7%;
+}
+.keychain--v-motos-racing {
+  inset: 66% auto auto 5%;
+  rotate: -20deg;
+  inline-size: 9%;
+}
+@media (max-width: 47.99rem) {
+  .keychain--ro-modas {
+    inset-block-start: 22%;
+    inset-inline-start: 5%;
+  }
+  .keychain--ro-cabelos {
+    inset-block-start: 22%;
+    inset-inline-start: 25%;
+  }
+  .keychain--brasileira-acai,
+  .keychain--leca-tintas {
+    inset-block-start: 46%;
+  }
+  .keychain--e4kc-motorsport {
+    inset-block-start: 65%;
+  }
+  .keychain--v-motos-racing {
+    inset-block-start: 71%;
+    inset-inline-start: 8%;
+    inline-size: 8%;
+  }
+}

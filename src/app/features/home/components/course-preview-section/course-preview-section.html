@@ -1,0 +1,39 @@
+<section
+  #courseSection
+  id="curso"
+  class="course-preview-section"
+  aria-labelledby="course-preview-title"
+  tabindex="-1"
+>
+  <div class="section-inner course-inner">
+    <div class="course-copy" data-keychain-obstacle="course-copy">
+      <p class="section-label">CURSO 3D FLASH</p>
+      <h2 id="course-preview-title" class="display-heading">
+        Aprenda a transformar
+        <span class="accent-text">ideias em criações.</span>
+      </h2>
+    </div>
+
+    <figure class="course-product" data-keychain-obstacle="course-product">
+      <img
+        [src]="assets.qrStand"
+        alt="Plaquinha 3D Flash com QR Codes e aproximação do celular"
+        width="1199"
+        height="1312"
+        loading="lazy"
+        decoding="async"
+      />
+    </figure>
+
+    <div class="course-action" data-keychain-obstacle="course-action">
+      <app-primary-button icon="external">Quero conhecer o curso</app-primary-button>
+    </div>
+
+    <app-phone-case-transformation
+      class="case-transformation-slot"
+      data-case-transformation
+      data-keychain-obstacle="course-case"
+      [triggerElement]="courseSection"
+    />
+  </div>
+</section>

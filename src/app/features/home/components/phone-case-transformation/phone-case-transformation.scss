@@ -1,0 +1,29 @@
+:host {
+  display: block;
+}
+.case-stage {
+  position: relative;
+  inline-size: 100%;
+  block-size: 100%;
+}
+.case-image {
+  position: absolute;
+  inline-size: 169.82%;
+  max-inline-size: none;
+  block-size: auto;
+  pointer-events: none;
+  transform-origin: 50% 50%;
+}
+// Compensate transparent margins of the original PNGs without cropping their pixels.
+.case-image--digital {
+  inset-inline-start: -35.16%;
+  inset-block-start: -9.22%;
+  opacity: 0;
+  filter: drop-shadow(0 0 0.35rem var(--color-cyan));
+}
+.case-image--physical {
+  inset-inline-start: -33.83%;
+  inset-block-start: -9.12%;
+  opacity: 1;
+  filter: drop-shadow(0 0 0.35rem var(--color-orange));
+}

@@ -1,0 +1,25 @@
+<div class="keychain-plane" data-keychain-origin>
+  @for (keychain of keychains; track keychain.id) {
+    <div
+      [class]="'keychain keychain--' + keychain.id"
+      [attr.data-keychain]="keychain.id"
+      data-keychain-path
+      [style.aspect-ratio]="keychain.bounds.width + '/' + keychain.bounds.height"
+    >
+      <div class="keychain-float" data-keychain-float>
+        @if (keychain.renderAllowed) {
+          <img
+            [src]="keychain.src"
+            alt=""
+            [width]="keychain.width"
+            [height]="keychain.height"
+            decoding="async"
+            [style.width.%]="(keychain.width / keychain.bounds.width) * 100"
+            [style.left.%]="(-keychain.bounds.x / keychain.bounds.width) * 100"
+            [style.top.%]="(-keychain.bounds.y / keychain.bounds.height) * 100"
+          />
+        }
+      </div>
+    </div>
+  }
+</div>

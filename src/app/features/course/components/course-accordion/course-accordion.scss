@@ -1,0 +1,93 @@
+:host {
+  display: block;
+  min-inline-size: 0;
+}
+
+.course-accordion {
+  border-block-start: 1px solid var(--color-course-border);
+}
+
+.module {
+  border-block-end: 1px solid var(--color-course-border);
+}
+
+.module-heading {
+  margin: 0;
+  font-size: inherit;
+}
+
+.module-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  inline-size: 100%;
+  min-block-size: 4rem;
+  padding: 1.15rem 0.25rem;
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  font-weight: 650;
+  line-height: 1.35;
+  text-align: start;
+  cursor: pointer;
+
+  span {
+    min-inline-size: 0;
+    overflow-wrap: anywhere;
+  }
+
+  svg {
+    flex: 0 0 1.5rem;
+    inline-size: 1.5rem;
+    block-size: 1.5rem;
+    color: var(--color-cyan);
+    transition: transform 180ms ease;
+  }
+}
+
+.module--expanded .module-trigger svg {
+  transform: rotate(180deg);
+}
+
+.module-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    grid-template-rows 180ms ease,
+    opacity 180ms ease,
+    visibility 0s linear 180ms;
+}
+
+.module-panel--expanded {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    grid-template-rows 180ms ease,
+    opacity 180ms ease,
+    visibility 0s;
+}
+
+.module-panel-inner {
+  min-block-size: 0;
+  overflow: hidden;
+}
+
+.module-description {
+  max-inline-size: 68ch;
+  margin: 0;
+  padding: 0.1rem 0.25rem 1.4rem;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .module-trigger svg,
+  .module-panel,
+  .module-panel--expanded {
+    transition: none;
+  }
+}

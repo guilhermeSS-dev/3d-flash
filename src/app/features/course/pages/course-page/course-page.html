@@ -1,0 +1,44 @@
+<div class="course-page">
+  <div class="course-shell">
+    <header class="course-header">
+      <img
+        [src]="assets.logo"
+        alt="3D Flash — Impressão 3D"
+        width="2169"
+        height="725"
+        fetchpriority="high"
+      />
+    </header>
+
+    <app-course-info [presentation]="config.course" />
+
+    <div class="enrollment-placement">
+      <app-enrollment-button [destination]="config.links.hotmart" />
+    </div>
+
+    <section class="course-modules" aria-labelledby="modules-heading">
+      <div class="modules-header">
+        <h2 id="modules-heading">Módulos do curso</h2>
+        <p class="provisional-note">Conteúdo provisório.</p>
+      </div>
+      <app-course-accordion [modules]="modules" />
+    </section>
+
+    <div class="enrollment-placement enrollment-placement--bottom">
+      <app-enrollment-button [destination]="config.links.hotmart" />
+    </div>
+
+    <a class="back-link" routerLink="/">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+        <path
+          d="M20 12H4m7-7-7 7 7 7"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+      Voltar ao início
+    </a>
+  </div>
+</div>

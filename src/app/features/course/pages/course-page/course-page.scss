@@ -1,0 +1,56 @@
+:host {
+  display: block;
+}
+.course-page {
+  min-block-size: 100svh;
+  background:
+    radial-gradient(ellipse at 100% 0, rgb(0 100 220 / 12%), transparent 46%),
+    var(--color-background);
+}
+.course-shell {
+  inline-size: min(100%, 62rem);
+  margin-inline: auto;
+  padding: clamp(1rem, 3vw, 2rem) var(--page-gutter) clamp(3rem, 6vw, 5rem);
+}
+.course-header {
+  margin-block-end: clamp(2.5rem, 5vw, 4rem);
+}
+.course-header img {
+  inline-size: clamp(12rem, 27vw, 18rem);
+}
+.enrollment-placement {
+  margin-block-start: clamp(1.75rem, 4vw, 2.5rem);
+}
+.course-modules {
+  margin-block-start: clamp(3rem, 6vw, 4.5rem);
+}
+.modules-header {
+  margin-block-end: 1.1rem;
+}
+h2 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  line-height: 1.2;
+}
+.provisional-note {
+  margin: 0.5rem 0 0;
+  color: var(--color-course-muted);
+  font-size: 0.9rem;
+}
+.enrollment-placement--bottom {
+  margin-block-start: 2rem;
+}
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-block-size: 44px;
+  margin-block-start: 1.75rem;
+  padding-block: 0.5rem;
+  font-weight: 600;
+}
+.back-link svg {
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+}

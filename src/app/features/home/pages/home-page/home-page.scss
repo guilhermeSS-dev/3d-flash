@@ -1,0 +1,29 @@
+:host {
+  display: block;
+}
+.home-page {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  background:
+    radial-gradient(ellipse at 95% 19%, rgb(0 90 220 / 24%), transparent 31%),
+    radial-gradient(ellipse at 8% 57%, rgb(0 70 190 / 22%), transparent 32%),
+    linear-gradient(var(--color-background), var(--color-background-deep));
+}
+.home-band {
+  position: relative;
+}
+.home-band--hero {
+  background:
+    linear-gradient(135deg, transparent 75%, rgb(0 97 240 / 10%) 75% 77%, transparent 77%),
+    radial-gradient(ellipse at 92% 79%, rgb(255 110 0 / 22%), transparent 21%);
+}
+.home-band--course {
+  padding-block-start: var(--keychain-before-course, 0px);
+  background:
+    linear-gradient(135deg, transparent 17%, rgb(0 70 205 / 12%) 17% 20%, transparent 20%),
+    radial-gradient(ellipse at 86% 72%, rgb(255 110 0 / 13%), transparent 24%);
+}
+.home-band--contact {
+  padding-block-start: var(--keychain-before-contact, 0px);
+}
