@@ -37,6 +37,9 @@ jobs:
       - name: Build Angular application
         run: npm run build -- --base-href /3d-flash/
 
+      - name: Verify published files and asset references
+        run: npm run verify:build
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
