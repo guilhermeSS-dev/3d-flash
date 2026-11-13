@@ -74,8 +74,9 @@ let verifiedAssets = 0;
 for (const asset of assets.assets) {
   if (!asset.destination.startsWith('public/')) continue;
   const path = await requireFile(asset.destination.slice('public/'.length));
-  if (digest(await readFile(path)) !== asset.sha256_destination)
-    fail(`Asset alterado: ${asset.destination}`);
+  const actualDigest = digest(await readFile(path));
+  if (actualDigest !== asset.sha256_destination)
+    fail(`Asset alterado: ${asset.destination}; esperado=${asset.sha256_destination}; atual=${actualDigest}`);
   verifiedAssets++;
 }
 await requireFile('3rdpartylicenses.txt');
