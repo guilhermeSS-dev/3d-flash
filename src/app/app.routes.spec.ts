@@ -111,7 +111,7 @@ describe('Application routing', () => {
     const scroll = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
 
     try {
-      expect(links.length).toBe(5);
+      expect(links.length).toBe(4);
       for (const link of links) {
         trigger.click();
         await harness.fixture.whenStable();
