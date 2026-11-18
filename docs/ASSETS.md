@@ -27,10 +27,10 @@ O caminho de origem completo, dimensões, modo de cor, tamanho e SHA-256 de orig
 
 | Arquivo                | Uso                       |   Bytes | SHA-256                                                            |
 | ---------------------- | ------------------------- | ------: | ------------------------------------------------------------------ |
-| `iniciante.jpeg`       | Card Iniciante            | 244.180 | `2ba78082292a1ed12712f7183ea98e8bba20a97eea74ca780e1acc364b53369d` |
-| `modelagem.jpeg`       | Card Modelagem            | 286.188 | `d350cab3fd24c2be6e57d6e03bf6ccc173055d5d45e7517c13bed2bf36a6895e` |
-| `produtos_banner.jpeg` | Banner de produtos Shopee | 290.196 | `f9e0d251ae9d3b1738619a6c0dc219f37951842fd16ca9b2f04403af7b14e8d3` |
-| `pessoa.jpeg`          | Nova imagem do Hero       | 223.056 | `a6badde47c582653b5f90d8fe944c2d8e61f7ea165ed6eb47ed9d03d20eadf97` |
+| `iniciante.jpeg`       | Card Iniciante            | 244.180 | `c0e41378391c65446f8d6435aa578a4fc9eb207387344f0ba91c8b53940d97dc` |
+| `modelagem.jpeg`       | Card Modelagem            | 286.188 | `1c94a80fe53b6822906fb0290889f9e7a29c7f682a184679997032f660e7b51c` |
+| `produtos_banner.jpeg` | Banner de produtos Shopee | 290.196 | `95db6b39dc61fb20607f2ea8d8ef29976d053fc3c836ea8e6f3213b179eb426a` |
+| `pessoa.jpeg`          | Nova imagem do Hero       | 223.056 | `f6bfe7e3eddb9320984d5709c9139dd77dfa5daae9494134fd9fad5b0a2e0355` |
 
 ## Pendências e limites de fidelidade
 

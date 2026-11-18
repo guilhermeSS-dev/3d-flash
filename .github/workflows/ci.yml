@@ -40,8 +40,5 @@ jobs:
       - name: Build for GitHub Pages
         run: npm run build -- --base-href /3d-flash/
 
-      - name: Print supplied asset SHA-256 values for manifest reconciliation
-        run: sha256sum public/assets/images/iniciante.jpeg public/assets/images/modelagem.jpeg public/assets/images/produtos_banner.jpeg public/assets/images/pessoa.jpeg
-
       - name: Verify build artifacts and asset integrity
         run: npm run verify:build
