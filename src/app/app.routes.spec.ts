@@ -46,18 +46,17 @@ describe('Application routing', () => {
     );
   });
 
-  it('navigates to the beginner course through both landing calls to action', async () => {
+  it('uses the Hero call to action as an anchor to the course section', async () => {
     const harness = await RouterTestingHarness.create('/');
     const router = TestBed.inject(Router);
 
     for (let index = 0; index < 2; index++) {
       await harness.navigateByUrl('/');
-      const links =
-        harness.routeNativeElement?.querySelectorAll<HTMLAnchorElement>('a[href="/curso"]');
-      expect(links?.length).toBe(2);
-      links?.[index]?.click();
+      const links = harness.routeNativeElement?.querySelectorAll<HTMLAnchorElement>('a[href="/#curso"]');
+      expect(links?.length).toBe(1);
+      links?.[0]?.click();
       await harness.fixture.whenStable();
-      expect(router.url).toBe('/curso/iniciante');
+      expect(router.url).toBe('/#curso');
     }
   });
 

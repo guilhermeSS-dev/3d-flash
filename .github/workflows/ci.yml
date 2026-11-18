@@ -31,16 +31,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Normalize formatting and export reviewed files
-        run: |
-          files=(src/app/features/home/components/course-preview-section/course-preview-section.html src/app/shared/components/primary-button/primary-button.html scripts/verify-build.mjs docs/ASSETS.md docs/ETAPA-9.md docs/ETAPAS.md docs/PRODUCAO.md)
-          npx prettier --write "${files[@]}"
-          for file in "${files[@]}"; do
-            echo "FORMATTED_FILE:$file"
-            base64 -w0 "$file"
-            echo
-          done
-
       - name: Check formatting
         run: npm run format:check
 
