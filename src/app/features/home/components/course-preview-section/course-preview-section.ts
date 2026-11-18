@@ -63,6 +63,9 @@ export class CoursePreviewSection {
     if (this.originImage) this.originImage.style.viewTransitionName = 'course-banner';
 
     this.runTransition(() => {
+      // The old card is captured before this callback. Remove its name from
+      // the live DOM before assigning the same name to the modal image.
+      if (this.originImage) this.originImage.style.viewTransitionName = '';
       this.selectedCourseId.set(courseId);
       this.changeDetector.detectChanges();
       this.dialog()?.nativeElement.showModal();
@@ -75,6 +78,9 @@ export class CoursePreviewSection {
       this.dialog()?.nativeElement.close();
       this.selectedCourseId.set(null);
       this.changeDetector.detectChanges();
+      // Give the original card image the shared name in the destination
+      // snapshot so the closing transition travels back to its exact origin.
+      if (this.originImage) this.originImage.style.viewTransitionName = 'course-banner';
     };
     const transition = this.runTransition(close);
     if (transition) void transition.finished.finally(() => this.clearOriginTransitionName());
