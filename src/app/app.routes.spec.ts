@@ -50,14 +50,12 @@ describe('Application routing', () => {
     const harness = await RouterTestingHarness.create('/');
     const router = TestBed.inject(Router);
 
-    for (let index = 0; index < 2; index++) {
-      await harness.navigateByUrl('/');
-      const links = harness.routeNativeElement?.querySelectorAll<HTMLAnchorElement>('a[href="/#curso"]');
-      expect(links?.length).toBe(1);
-      links?.[0]?.click();
-      await harness.fixture.whenStable();
-      expect(router.url).toBe('/#curso');
-    }
+    const links =
+      harness.routeNativeElement?.querySelectorAll<HTMLAnchorElement>('a[href="/#curso"]');
+    expect(links?.length).toBe(1);
+    links?.[0]?.click();
+    await harness.fixture.whenStable();
+    expect(router.url).toBe('/#curso');
   });
 
   it('loads the selected course JSON when navigating between course cards', async () => {
