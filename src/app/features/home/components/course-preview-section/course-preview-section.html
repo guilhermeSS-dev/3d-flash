@@ -23,5 +23,61 @@
         decoding="async"
       />
     </figure>
+
+    <div class="course-cards" aria-label="Cursos disponíveis">
+      <a
+        class="course-card"
+        routerLink="/curso/iniciante"
+        aria-label="Conheça o curso de impressão 3D para iniciantes"
+      >
+        <span class="course-card-image">
+          <img
+            [src]="assets.courses.beginner"
+            alt=""
+            width="1024"
+            height="1536"
+            loading="lazy"
+            decoding="async"
+          />
+        </span>
+        <span class="course-card-content">
+          <span class="course-card-eyebrow">COMECE DO ZERO</span>
+          <span class="course-card-title">Impressão 3D para iniciantes</span>
+          <span class="course-card-action">
+            Conheça o curso
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+              <path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+        </span>
+      </a>
+
+      <a
+        class="course-card"
+        routerLink="/curso/modelagem"
+        aria-label="Conheça o curso de modelagem 3D para impressão 3D"
+      >
+        <span class="course-card-image">
+          <img
+            [src]="assets.courses.modeling"
+            alt=""
+            width="1024"
+            height="1536"
+            loading="lazy"
+            decoding="async"
+          />
+        </span>
+        <span class="course-card-content">
+          <span class="course-card-eyebrow">CRIE SUAS PRÓPRIAS PEÇAS</span>
+          <span class="course-card-title">Modelagem 3D para impressão</span>
+          <span class="course-card-action">
+            Conheça o curso
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+              <path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+        </span>
+      </a>
+    </div>
   </div>
 </section>

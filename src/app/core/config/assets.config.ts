@@ -1,10 +1,13 @@
-import { TestRequest } from '@angular/common/http/testing';
 import { KeychainAsset } from '../models/keychain-asset';
 
 export const siteAssets = {
   logo: 'assets/images/logo.png',
   menu: 'assets/icons/menu-raios.png',
   qrStand: 'assets/images/plaquinha-qr.png',
+  courses: {
+    beginner: 'assets/images/iniciante.jpeg',
+    modeling: 'assets/images/modelagem.jpeg',
+  },
   phoneCase: {
     digital: 'assets/images/capinha-digital.png',
     physical: 'assets/images/capinha-fisica.png',
