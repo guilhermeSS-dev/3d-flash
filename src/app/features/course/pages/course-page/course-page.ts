@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { siteAssets } from '../../../../core/config/assets.config';
 import { siteConfig } from '../../../../core/config/site.config';
@@ -16,12 +17,17 @@ import { courseCatalog } from '../../data/course.data';
 })
 export class CoursePage {
   private readonly route = inject(ActivatedRoute);
-  private readonly courseId = this.route.snapshot.paramMap.get('courseId') ?? 'iniciante';
-  private readonly selectedCourse =
-    courseCatalog[this.courseId as keyof typeof courseCatalog] ?? courseCatalog.iniciante;
+  private readonly routeParams = toSignal(this.route.paramMap, {
+    initialValue: this.route.snapshot.paramMap,
+  });
+
+  private readonly selectedCourse = computed(() => {
+    const courseId = this.routeParams().get('courseId') ?? 'iniciante';
+    return courseCatalog[courseId as keyof typeof courseCatalog] ?? courseCatalog.iniciante;
+  });
 
   protected readonly assets = siteAssets;
   protected readonly config = siteConfig;
-  protected readonly presentation = this.selectedCourse.presentation;
-  protected readonly modules = this.selectedCourse.modules;
+  protected readonly presentation = computed(() => this.selectedCourse().presentation);
+  protected readonly modules = computed(() => this.selectedCourse().modules);
 }
