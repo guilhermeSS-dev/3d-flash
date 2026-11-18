@@ -139,8 +139,8 @@ export class CoursePreviewSection {
     this.changeDetector.detectChanges();
 
     const imageAnimation = movingImage.animate(
-      [this.transformFrame(0, 0, 1, 1), this.transformFrame(
-        sourceRect.left - destinationRect.left, sourceRect.top - destinationRect.top,
+      [this.transformFrame(destinationRect.left, destinationRect.top, 1, 1), this.transformFrame(
+        sourceRect.left, sourceRect.top,
         sourceRect.width / destinationRect.width, sourceRect.height / destinationRect.height,
       )],
       { duration: this.transitionDuration, easing: this.transitionEasing, fill: 'forwards' },
