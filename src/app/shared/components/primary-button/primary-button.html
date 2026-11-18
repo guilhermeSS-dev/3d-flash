@@ -1,8 +1,4 @@
-<a
-  class="primary-button"
-  [routerLink]="fragment() ? ['/'] : destination"
-  [fragment]="fragment()"
->
+<a class="primary-button" [routerLink]="fragment() ? ['/'] : destination" [fragment]="fragment()">
   @if (icon() === 'course') {
     <svg class="button-icon" viewBox="0 0 40 32" fill="none" aria-hidden="true" focusable="false">
       <path d="M1 10 20 2l19 8-19 8L1 10Z" fill="currentColor" />

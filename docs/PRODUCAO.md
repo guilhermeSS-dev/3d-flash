@@ -40,14 +40,14 @@ No GitHub Pages deste repositório, a aplicação é servida em /3d-flash/. O bu
 
 ## Configurações que ainda precisam de valores
 
-| Informação | Arquivo |
-| --- | --- |
-| Instagram, WhatsApp, inscrição e catálogo Shopee | src/app/core/config/site.config.ts |
-| Nome, duração e introdução dos cursos | src/app/features/course/data/iniciante.json e modelagem.json |
-| Módulos e descrições definitivos | Os mesmos JSONs dos cursos |
-| Assets liberados ou bloqueados | src/app/core/config/assets.config.ts |
-| Fonte e tokens visuais | src/styles/_tokens.scss |
-| Intensidade e duração das animações | src/app/core/config/animation.config.ts |
+| Informação                                       | Arquivo                                                      |
+| ------------------------------------------------ | ------------------------------------------------------------ |
+| Instagram, WhatsApp, inscrição e catálogo Shopee | src/app/core/config/site.config.ts                           |
+| Nome, duração e introdução dos cursos            | src/app/features/course/data/iniciante.json e modelagem.json |
+| Módulos e descrições definitivos                 | Os mesmos JSONs dos cursos                                   |
+| Assets liberados ou bloqueados                   | src/app/core/config/assets.config.ts                         |
+| Fonte e tokens visuais                           | src/styles/_tokens.scss                                      |
+| Intensidade e duração das animações              | src/app/core/config/animation.config.ts                      |
 
 Manter URLs vazias enquanto não existirem destinos reais. Os dois CTAs da landing navegam para /curso, que redireciona para o curso Iniciante; os cards abrem o curso correspondente. As duas inscrições usam a mesma configuração. A inscrição exige HTTPS. Não colocar segredos no frontend.
 
