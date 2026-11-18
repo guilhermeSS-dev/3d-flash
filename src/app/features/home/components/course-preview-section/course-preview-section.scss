@@ -1,196 +1,85 @@
-:host {
-  display: block;
-}
-
-.course-preview-section {
-  position: relative;
-  isolation: isolate;
-}
-
+:host { display: block; }
+.course-preview-section { position: relative; isolation: isolate; }
 .course-inner {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(10rem, 0.55fr);
-  grid-template-rows: auto auto;
-  gap: 1.5rem 2rem;
-  align-items: center;
+  position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(10rem, .55fr);
+  grid-template-rows: auto auto; gap: 1.5rem 2rem; align-items: center;
   padding-block: 2.75rem 3.5rem;
   padding-inline: max(var(--page-gutter), var(--keychain-route-corridor, 0px));
 }
-
-.course-copy {
-  grid-column: 1;
-  grid-row: 1;
-  min-inline-size: 0;
-  overflow-wrap: anywhere;
-  padding-block-start: 0.6rem;
-
-  .section-label {
-    justify-content: flex-start;
-  }
+.course-copy { grid-column: 1; grid-row: 1; min-inline-size: 0; overflow-wrap: anywhere; padding-block-start: .6rem;
+  .section-label { justify-content: flex-start; }
 }
-
-.accent-text {
-  display: block;
+.accent-text { display: block; }
+.course-product { grid-column: 2; grid-row: 1; justify-self: end; align-self: center;
+  inline-size: min(100%, clamp(10rem, 18vw, 15rem)); margin: 0; filter: drop-shadow(0 0 1.25rem var(--color-orange));
+  img { display: block; inline-size: 100%; block-size: auto; }
 }
-
-.course-product {
-  grid-column: 2;
-  grid-row: 1;
-  justify-self: end;
-  align-self: center;
-  inline-size: min(100%, clamp(10rem, 18vw, 15rem));
-  margin: 0;
-  filter: drop-shadow(0 0 1.25rem var(--color-orange));
-
-  img {
-    display: block;
-    inline-size: 100%;
-    block-size: auto;
-  }
-}
-
-.course-cards {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(1rem, 2.5vw, 2rem);
-  align-items: start;
-}
-
+.course-cards { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1rem, 2.5vw, 2rem); align-items: start; }
 .course-card {
-  display: flex;
-  flex-direction: column;
-  min-inline-size: 0;
-  overflow: hidden;
-  border-radius: 1.15rem;
-  color: inherit;
-  text-decoration: none;
-  -webkit-tap-highlight-color: transparent;
-  background: #080808;
-  box-shadow: 0 0.65rem 1.8rem rgb(0 0 0 / 22%);
-  transition: box-shadow 220ms ease;
-
-  &:focus-visible {
-    outline: 2px solid var(--color-cyan);
-    outline-offset: 5px;
-    border-radius: 1.15rem;
-  }
-
-  &:active .course-card-image img {
-    transform: scale(1.035);
-  }
-
-  &:hover,
-  &:focus-visible {
-    box-shadow: 0 0.85rem 2.25rem rgb(0 0 0 / 28%);
-  }
-
-  &:hover .course-card-image img,
-  &:focus-visible .course-card-image img {
-    transform: scale(1.045);
-  }
-
-  &:hover .course-card-action svg,
-  &:focus-visible .course-card-action svg {
-    transform: translateX(0.2rem);
-  }
+  display: flex; flex-direction: column; min-inline-size: 0; overflow: hidden; padding: 0; border: 0;
+  border-radius: 1.15rem; color: inherit; text-align: start; cursor: pointer; -webkit-tap-highlight-color: transparent;
+  background: #080808; box-shadow: 0 .8rem 2rem rgb(0 0 0 / 26%);
+  animation: course-card-float 6s ease-in-out infinite; transition: box-shadow 240ms ease, transform 240ms ease;
+  &:nth-child(2) { animation-delay: -3s; }
+  &:focus-visible { outline: 2px solid var(--color-cyan); outline-offset: 5px; }
+  &:hover, &:focus-visible { box-shadow: 0 1rem 2.5rem rgb(0 0 0 / 34%); }
+  &:active { transform: translateY(1px); }
+  &:hover .course-card-action svg, &:focus-visible .course-card-action svg { transform: translateX(.2rem); }
 }
-
-.course-card-image {
-  display: block;
-  inline-size: 100%;
-  aspect-ratio: 1;
-  overflow: hidden;
-  border: 0;
-  border-radius: 1.15rem 1.15rem 0 0;
-  background: #080808;
-
-  img {
-    display: block;
-    inline-size: 100%;
-    block-size: 100%;
-    object-fit: contain;
-    object-position: center;
-    transition: transform 420ms cubic-bezier(0.2, 0.75, 0.25, 1);
-  }
+@keyframes course-card-float {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -.45rem, 0); }
 }
-
+.course-card-image { display: block; inline-size: 100%; aspect-ratio: 1; overflow: hidden; border-radius: 1.15rem 1.15rem 0 0; background: #080808;
+  img { display: block; inline-size: 100%; block-size: 100%; object-fit: contain; object-position: center; }
+}
 .course-card-action {
-  display: inline-flex;
-  align-items: center;
-  align-self: stretch;
-  justify-content: space-between;
-  gap: 0.5rem;
-  margin-block-start: 0;
-  padding: 0.9rem 1rem;
-  background: #080808;
-  border-radius: 0 0 1.15rem 1.15rem;
-  color: var(--color-cyan);
-  font-size: 0.9rem;
-  font-weight: 700;
-  line-height: 1.4;
-
-  svg {
-    inline-size: 1.1rem;
-    block-size: 1.1rem;
-    flex: 0 0 auto;
-    transition: transform 180ms ease;
-  }
+  display: inline-flex; align-items: center; align-self: stretch; justify-content: space-between; gap: .5rem;
+  padding: .9rem 1rem; background: #080808; border-radius: 0 0 1.15rem 1.15rem; color: var(--color-cyan);
+  font-size: .9rem; font-weight: 700; line-height: 1.4;
+  svg { inline-size: 1.1rem; block-size: 1.1rem; flex: 0 0 auto; transition: transform 180ms ease; }
 }
+.course-modal {
+  position: fixed; inset: 50% auto auto 50%; display: flex; flex-direction: column;
+  inline-size: min(90vw, 70rem); max-inline-size: calc(100vw - 2rem); block-size: min(88dvh, 58rem);
+  max-block-size: none; margin: 0; padding: 0; overflow: hidden; transform: translate(-50%, -50%);
+  border: 1px solid rgb(255 255 255 / 12%); border-radius: 1.25rem;
+  background: var(--color-background); color: var(--color-text); box-shadow: 0 2rem 6rem rgb(0 0 0 / 55%);
+}
+.course-modal::backdrop { background: rgb(0 0 0 / 72%); backdrop-filter: blur(8px); }
+.course-modal-header { position: relative; flex: 0 0 clamp(12rem, 28vh, 19rem); min-block-size: 0; overflow: hidden; background: #080808; }
+.course-modal-banner { inline-size: 100%; block-size: 100%;
+  img { display: block; inline-size: 100%; block-size: 100%; object-fit: contain; object-position: center; }
+}
+.course-modal-close {
+  position: absolute; z-index: 1; inset-block-start: 1rem; inset-inline-end: 1rem; display: grid; place-items: center;
+  inline-size: 2.75rem; block-size: 2.75rem; padding: 0; border: 1px solid rgb(255 255 255 / 24%);
+  border-radius: 50%; background: rgb(0 0 0 / 62%); color: #fff; cursor: pointer; backdrop-filter: blur(10px);
+  svg { inline-size: 1.25rem; block-size: 1.25rem; }
+  &:hover { background: rgb(0 0 0 / 82%); }
+}
+.course-modal-scroll { flex: 1 1 auto; min-block-size: 0; overflow: auto; overscroll-behavior: contain; scrollbar-gutter: stable; }
+.course-modal-content { inline-size: min(100%, 62rem); margin-inline: auto; padding: clamp(1.25rem, 3vw, 2.5rem) var(--page-gutter) 3rem; }
+.enrollment-placement { margin-block-start: clamp(1.75rem, 4vw, 2.5rem); }
+.course-modules { margin-block-start: clamp(3rem, 6vw, 4.5rem); }
+.modules-header { margin-block-end: 1.1rem; }
+.modules-header h2 { margin: 0; font-family: var(--font-heading); font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1.2; }
+.provisional-note { margin: .5rem 0 0; color: var(--color-course-muted); font-size: .9rem; }
+.enrollment-placement--bottom { margin-block-start: 2rem; }
 
 @media (max-width: 47.99rem) {
-  .course-inner {
-    grid-template-columns: minmax(0, 1fr) minmax(6rem, 0.45fr);
-    gap: 1.25rem 0.75rem;
-    padding-block: 1.75rem 2.75rem;
-  }
-
-  .course-copy {
-    grid-column: 1 / -1;
-    grid-row: 1;
-    max-inline-size: 34rem;
-    padding-block-start: 0;
-  }
-
-  .course-product {
-    grid-column: 2;
-    grid-row: 2;
-    inline-size: clamp(6rem, 30vw, 10rem);
-    margin-inline-end: 0.5rem;
-  }
-
-  .course-cards {
-    grid-column: 1 / -1;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1.25rem;
-  }
-
-  .course-card {
-    border-radius: 1rem;
-  }
-
-  .course-card-image {
-    border-radius: 1rem 1rem 0 0;
-  }
-
-  .course-card-action {
-    padding: 0.8rem 0.9rem;
-    border-radius: 0 0 1rem 1rem;
-    font-size: 0.85rem;
-  }
+  .course-inner { grid-template-columns: minmax(0, 1fr) minmax(6rem, .45fr); gap: 1.25rem .75rem; padding-block: 1.75rem 2.75rem; }
+  .course-copy { grid-column: 1 / -1; grid-row: 1; max-inline-size: 34rem; padding-block-start: 0; }
+  .course-product { grid-column: 2; grid-row: 2; inline-size: clamp(6rem, 30vw, 10rem); margin-inline-end: .5rem; }
+  .course-cards { grid-column: 1 / -1; grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
+  .course-card, .course-card-image { border-radius: 1rem; }
+  .course-card-image { border-radius: 1rem 1rem 0 0; }
+  .course-card-action { padding: .8rem .9rem; border-radius: 0 0 1rem 1rem; font-size: .85rem; }
+  .course-modal { inset: 0; inline-size: 100%; max-inline-size: none; block-size: 100%; border: 0; border-radius: 0; transform: none; }
+  .course-modal-header { flex-basis: min(30dvh, 15rem); flex-shrink: 0; }
+  .course-modal-close { inset-block-start: max(.75rem, env(safe-area-inset-top)); inset-inline-end: max(.75rem, env(safe-area-inset-right)); }
+  .course-modal-content { padding-block-start: 1.5rem; padding-block-end: max(2rem, env(safe-area-inset-bottom)); }
 }
-
 @media (prefers-reduced-motion: reduce) {
-  .course-card-image,
-  .course-card-image img,
-  .course-card-action svg {
-    transition: none;
-  }
-
-  .course-card:active .course-card-image img,
-  .course-card:hover .course-card-image img,
-  .course-card:focus-visible .course-card-image img {
-    transform: none;
-  }
+  .course-card, .course-card-action svg { animation: none; transition: none; }
 }
