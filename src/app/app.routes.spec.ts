@@ -51,7 +51,7 @@ describe('Application routing', () => {
     const router = TestBed.inject(Router);
 
     const links =
-      harness.routeNativeElement?.querySelectorAll<HTMLAnchorElement>('a[href="/#curso"]');
+      harness.routeNativeElement?.querySelectorAll<HTMLAnchorElement>('.hero-copy a[href="/#curso"]');
     expect(links?.length).toBe(1);
     links?.[0]?.click();
     await harness.fixture.whenStable();
