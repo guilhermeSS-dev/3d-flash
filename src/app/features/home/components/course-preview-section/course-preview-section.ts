@@ -86,8 +86,8 @@ export class CoursePreviewSection {
     const movingImage = this.createMovingImage(layer, source, sourceRect, sourceStyle.objectFit, sourceStyle.objectPosition);
     layer.showModal();
     const animation = movingImage.animate(
-      [this.transformFrame(0, 0, 1, 1), this.transformFrame(
-        destinationRect.left - sourceRect.left, destinationRect.top - sourceRect.top,
+      [this.transformFrame(sourceRect.left, sourceRect.top, 1, 1), this.transformFrame(
+        destinationRect.left, destinationRect.top,
         destinationRect.width / sourceRect.width, destinationRect.height / sourceRect.height,
       )],
       { duration: this.transitionDuration, easing: this.transitionEasing, fill: 'forwards' },
