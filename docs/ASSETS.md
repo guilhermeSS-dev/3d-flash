@@ -1,8 +1,8 @@
 # Assets da 3D Flash
 
-Os 14 arquivos recebidos foram preservados e copiados byte a byte. Nenhuma imagem foi recortada, otimizada, recriada ou editada. Os mockups ficam exclusivamente em `docs/references/`; os demais arquivos ficam em `public/assets/`.
+Os 14 arquivos recebidos originalmente foram preservados e copiados byte a byte. Os quatro assets adicionais enviados para a implementação da landing estão inventariados separadamente em [assets-manifest.json](assets-manifest.json), com SHA-256 calculado sobre os arquivos versionados. Nenhuma imagem foi recortada, otimizada ou editada. Os mockups ficam exclusivamente em `docs/references/`; os arquivos de produção ficam em `public/assets/`.
 
-## Inventário
+## Inventário original
 
 O caminho de origem completo, dimensões, modo de cor, tamanho e SHA-256 de origem e destino estão registrados em [assets-manifest.json](assets-manifest.json). A origem comum é `/workspace/assets/3d-flash/`.
 
@@ -23,23 +23,28 @@ O caminho de origem completo, dimensões, modo de cor, tamanho e SHA-256 de orig
 | 13      | `13-A8E30AE0-D4B1-4528-B808-D517EB872A0B.PNG` | `public/assets/images/pessoa-original.png`    | 1254 × 1254 | RGB  |
 | 14      | `14-FD354FB4-B347-4A09-9216-6F48508CBFE1.PNG` | `docs/references/mockup-desktop.png`          | 1024 × 1536 | RGB  |
 
+## Assets adicionais enviados para a landing
+
+| Arquivo | Uso | Bytes | SHA-256 |
+| --- | --- | ---: | --- |
+| `iniciante.jpeg` | Card Iniciante | 244.180 | `2ba78082292a1ed12712f7183ea98e8bba20a97eea74ca780e1acc364b53369d` |
+| `modelagem.jpeg` | Card Modelagem | 286.188 | `d350cab3fd24c2be6e57d6e03bf6ccc173055d5d45e7517c13bed2bf36a6895e` |
+| `produtos_banner.jpeg` | Banner de produtos Shopee | 290.196 | `f9e0d251ae9d3b1738619a6c0dc219f37951842fd16ca9b2f04403af7b14e8d3` |
+| `pessoa.jpeg` | Nova imagem do Hero | 223.056 | `a6badde47c582653b5f90d8fe944c2d8e61f7ea165ed6eb47ed9d03d20eadf97` |
+
 ## Pendências e limites de fidelidade
 
-- **Pessoa (`pessoa-original.png`): renderização bloqueada até receber o arquivo correto.** O arquivo 13 é RGB e contém o xadrez incorporado aos pixels. Não possui transparência real, inclusive ao redor dos rastros azuis e na abertura da câmera da capinha. Não aplicar remoção automática nem usar o mockup como substituto do asset original.
-- **Chaveiro `e4kc-motorsport.png`: divergência de identidade.** O arquivo 4 fornecido mostra “e4KC Motorsport”, enquanto os mockups mostram “C4K Marketing”. Aguardar definição/arquivo correto para concluir a fidelidade desse elemento; não substituir silenciosamente.
-- **Elementos não fornecidos separadamente:** fundo azul, divisórias onduladas, pedestais das capinhas e ícones sociais tridimensionais. Registrar a falta dos originais antes de finalizar os elementos visuais correspondentes. Não extrair os produtos ou a pessoa dos mockups.
-- **Recortes:** logo, ícone de menu, plaquinha e alguns chaveiros apresentam pequenas franjas/artefatos de recorte. Avaliar sua aparência no fundo azul da implementação antes de propor qualquer alteração.
-- **Margens e halos:** as imagens têm caixas transparentes e halos diferentes. A futura trajetória deve considerar os limites visíveis dos objetos, e não somente a caixa completa do PNG, para preservar escala e corredores de passagem.
+- **Pessoa original:** `pessoa-original.png` contém o xadrez incorporado aos pixels e permanece fora do Hero. A imagem enviada posteriormente, `pessoa.jpeg`, é a imagem efetivamente usada no Hero.
+- **Chaveiro e4KC Motorsport:** o arquivo fornecido mostra “e4KC Motorsport”, enquanto a referência mostra “C4K Marketing”. A imagem divergente continua sem renderização.
+- **Elementos não fornecidos separadamente:** fundo azul, divisórias onduladas, pedestais das capinhas e ícones sociais tridimensionais. Os elementos visuais atuais são aproximações da composição original.
+- **Recortes:** os PNGs originais permanecem inalterados. As franjas/artefatos de recorte devem ser avaliados no fundo azul da implementação.
+- **Margens e halos:** as imagens têm caixas transparentes e halos diferentes. A trajetória considera os limites visíveis dos objetos, e não somente a caixa completa do PNG.
 - **Referência mobile:** `mockup-mobile.png` contém margens pretas laterais; elas pertencem ao arquivo de referência e não definem margens fixas do layout responsivo.
 
-## Verificações executadas
+## Verificações
 
-- 14 arquivos de origem encontrados e copiados para os destinos descritos.
-- SHA-256 de cada cópia comparado com a origem: 14 de 14 idênticos.
-- Dimensões e modo de cor lidos com Pillow: arquivos 1–11 em RGBA; arquivos 12–14 em RGB.
-- Os PNGs originais permanecem em `/workspace/assets/3d-flash/`.
-- Nenhuma alteração em `src/`, `package.json` ou `README.md` foi realizada por esta organização de assets.
+Os 14 assets originais e seus estados de integridade permanecem descritos no manifesto. Os quatro assets adicionais têm hashes próprios no mesmo manifesto e são conferidos pelo verificador de build. Os arquivos originais não foram alterados.
 
 ## Uso futuro
 
-Os arquivos em `public/` serão servidos a partir de `/assets/`. A presença de um arquivo nessa pasta não autoriza renderizar um asset marcado como pendente. Em particular, a pessoa deve permanecer sem renderização até a resolução da transparência. As URLs comerciais e a fonte definitiva são configurações pendentes, separadas deste inventário de imagens.
+Os arquivos em `public/` são servidos a partir de `/assets/`. A presença de um arquivo nessa pasta não autoriza renderizar um asset marcado como pendente. Em particular, o chaveiro e4KC permanece bloqueado até receber o correspondente da referência.

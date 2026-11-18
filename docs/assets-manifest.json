@@ -221,5 +221,35 @@
       "bytes_verified_equal": true,
       "status": "reference_only"
     }
+  ],
+  "additional_user_assets": [
+    {
+      "description": "Card do curso Iniciante",
+      "destination": "public/assets/images/iniciante.jpeg",
+      "bytes": 244180,
+      "sha256_destination": "2ba78082292a1ed12712f7183ea98e8bba20a97eea74ca780e1acc364b53369d",
+      "status": "user_supplied"
+    },
+    {
+      "description": "Card do curso Modelagem",
+      "destination": "public/assets/images/modelagem.jpeg",
+      "bytes": 286188,
+      "sha256_destination": "d350cab3fd24c2be6e57d6e03bf6ccc173055d5d45e7517c13bed2bf36a6895e",
+      "status": "user_supplied"
+    },
+    {
+      "description": "Banner de produtos Shopee",
+      "destination": "public/assets/images/produtos_banner.jpeg",
+      "bytes": 290196,
+      "sha256_destination": "f9e0d251ae9d3b1738619a6c0dc219f37951842fd16ca9b2f04403af7b14e8d3",
+      "status": "user_supplied"
+    },
+    {
+      "description": "Nova imagem do Hero",
+      "destination": "public/assets/images/pessoa.jpeg",
+      "bytes": 223056,
+      "sha256_destination": "a6badde47c582653b5f90d8fe944c2d8e61f7ea165ed6eb47ed9d03d20eadf97",
+      "status": "user_supplied_replaces_previous_hero_asset"
+    }
   ]
 }
