@@ -61,6 +61,16 @@ describe('Application acceptance structure', () => {
     expect(overlay.querySelector('svg')!.getAttribute('focusable')).toBe('false');
   });
 
+  it('renders the Shopee products banner and keeps its link unavailable until configured', async () => {
+    const harness = await RouterTestingHarness.create('/');
+    const products = harness.routeNativeElement?.querySelector('#produtos');
+    expect(products?.querySelector('img')?.getAttribute('src')).toBe(
+      'assets/images/produtos_banner.jpeg',
+    );
+    expect(products?.querySelector('a[href]')).toBeNull();
+    expect(products?.textContent).toContain('link do catálogo será disponibilizado em breve');
+  });
+
   it('repeated route navigation never duplicates menus, electric overlays or page headings', async () => {
     const harness = await RouterTestingHarness.create('/');
     for (let cycle = 0; cycle < 3; cycle++) {
