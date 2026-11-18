@@ -62,9 +62,14 @@
   display: flex;
   flex-direction: column;
   min-inline-size: 0;
+  overflow: hidden;
+  border-radius: 1.15rem;
   color: inherit;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
+  background: #080808;
+  box-shadow: 0 0.65rem 1.8rem rgb(0 0 0 / 22%);
+  transition: box-shadow 220ms ease;
 
   &:focus-visible {
     outline: 2px solid var(--color-cyan);
@@ -76,8 +81,8 @@
     transform: scale(1.035);
   }
 
-  &:hover .course-card-image,
-  &:focus-visible .course-card-image {
+  &:hover,
+  &:focus-visible {
     box-shadow: 0 0.85rem 2.25rem rgb(0 0 0 / 28%);
   }
 
@@ -97,13 +102,9 @@
   inline-size: 100%;
   aspect-ratio: 1;
   overflow: hidden;
-  border: 2px solid var(--color-cyan);
-  border-radius: 1.15rem;
-  background: var(--color-background, #000f2c);
-  box-shadow: 0 0.65rem 1.8rem rgb(0 0 0 / 22%);
-  transition:
-    box-shadow 220ms ease,
-    border-color 220ms ease;
+  border: 0;
+  border-radius: 1.15rem 1.15rem 0 0;
+  background: #080808;
 
   img {
     display: block;
@@ -118,10 +119,13 @@
 .course-card-action {
   display: inline-flex;
   align-items: center;
-  align-self: flex-start;
+  align-self: stretch;
+  justify-content: space-between;
   gap: 0.5rem;
-  margin-block-start: 0.8rem;
-  padding-inline: 0.15rem;
+  margin-block-start: 0;
+  padding: 0.9rem 1rem;
+  background: #080808;
+  border-radius: 0 0 1.15rem 1.15rem;
   color: var(--color-cyan);
   font-size: 0.9rem;
   font-weight: 700;
@@ -162,12 +166,17 @@
     gap: 1.25rem;
   }
 
-  .course-card-image {
+  .course-card {
     border-radius: 1rem;
   }
 
+  .course-card-image {
+    border-radius: 1rem 1rem 0 0;
+  }
+
   .course-card-action {
-    margin-block-start: 0.65rem;
+    padding: 0.8rem 0.9rem;
+    border-radius: 0 0 1rem 1rem;
     font-size: 0.85rem;
   }
 }
