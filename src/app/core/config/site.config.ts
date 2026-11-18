@@ -7,6 +7,6 @@ export const siteConfig = {
     description: 'Impressão 3D',
     concept: 'Da imaginação à realidade',
   },
-  links: { instagram: '', whatsapp: '', hotmart: '', course: '/curso' },
+  links: { instagram: '', whatsapp: '', hotmart: '', productCatalog: '', course: '/curso' },
   course: { name: '', duration: '', introduction: '' },
 } as const satisfies SiteConfig;
