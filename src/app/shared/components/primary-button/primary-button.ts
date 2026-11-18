@@ -11,6 +11,6 @@ import { siteConfig } from '../../../core/config/site.config';
 })
 export class PrimaryButton {
   readonly icon = input<'course' | 'external'>('course');
-  readonly fragment = input<string | null>(null);
+  readonly fragment = input<string | undefined>(undefined);
   protected readonly destination = siteConfig.links.course;
 }
