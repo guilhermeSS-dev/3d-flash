@@ -41,13 +41,14 @@ describe('Application acceptance structure', () => {
     },
   );
 
-  it('preserves exactly four home sections and the footer with non-interactive decorations', async () => {
+  it('preserves the five home sections and the footer with non-interactive decorations', async () => {
     const harness = await RouterTestingHarness.create('/');
     const page = harness.routeNativeElement!;
     expect(Array.from(page.querySelectorAll('section[id]')).map((node) => node.id)).toEqual([
       'inicio',
       'sobre',
       'curso',
+      'produtos',
       'contato',
     ]);
     expect(page.querySelectorAll('footer#rodape')).toHaveLength(1);
