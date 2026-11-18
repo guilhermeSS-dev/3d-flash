@@ -11,8 +11,7 @@
       @for (course of courses; track course.id) {
         <button class="course-card" type="button" [attr.aria-label]="'Conheça ' + course.label" (click)="openCourse(course.id, $event)">
           <span class="course-card-image">
-            <img [src]="course.image" [alt]="course.alt" width="1024" height="1024" loading="lazy" decoding="async"
-              [style.view-transition-name]="selectedCourseId() === course.id ? 'course-banner' : null" />
+            <img [src]="course.image" [alt]="course.alt" width="1024" height="1024" loading="lazy" decoding="async" />
           </span>
           <span class="course-card-action">
             <span>Conheça o curso</span>
@@ -28,8 +27,8 @@
       (click)="onDialogClick($event)" (cancel)="onDialogCancel($event)">
       <header class="course-modal-header">
         <div class="course-modal-banner">
-          <img [src]="selectedCourseImage()" [alt]="selectedCourseAlt()" width="1024" height="1024"
-            fetchpriority="high" decoding="async" [style.view-transition-name]="'course-banner'" />
+          <img #modalBannerImage [src]="selectedCourseImage()" [alt]="selectedCourseAlt()" width="1024" height="1024"
+            fetchpriority="high" decoding="async" />
         </div>
         <button class="course-modal-close" type="button" aria-label="Fechar detalhes do curso" (click)="closeCourse()">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
