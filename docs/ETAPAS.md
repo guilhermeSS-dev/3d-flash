@@ -8,7 +8,6 @@ Cards Iniciante/Modelagem, navegação para dados JSON independentes, seção Pr
 
 ## Pendências de fechamento
 
-- Confirmar o workflow CI de develop e corrigir eventuais falhas encontradas.
 - URLs oficiais de Instagram, WhatsApp, inscrição e catálogo Shopee; apresentação comercial e conteúdo definitivo dos módulos.
 - Assets originais pendentes: chaveiro C4K Marketing, fonte, fundo, divisórias, pedestais e ícones sociais tridimensionais.
 - Comparação visual desktop/mobile; inspeção em tablets, zoom, teclado, movimento reduzido e tecnologias assistivas.

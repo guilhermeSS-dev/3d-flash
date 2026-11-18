@@ -20,7 +20,7 @@ Instagram, WhatsApp, inscrição Hotmart e catálogo Shopee continuam sem URLs p
 
 ## Validação
 
-Os testes foram atualizados para cobrir as rotas por curso, a troca dinâmica de JSON, o Hero atualizado, as quatro âncoras e a estrutura da seção Produtos. O ambiente desta edição não disponibilizou execução local de Node/npm; a validação automatizada deverá ser confirmada pelo workflow de CI. Não foi executada inspeção visual em navegador.
+Validação concluída pelo workflow de CI da develop: formatação aprovada, 151 testes aprovados em 19 arquivos, build de produção Angular concluído e verificação SHA-256 dos assets aprovada. O bundle inicial ficou em 241,54 kB (66,28 kB estimados de transferência), com landing lazy de 189,14 kB e curso lazy de 12,80 kB. Não foi executada inspeção visual em navegador.
 
 ## Limites conhecidos
 
