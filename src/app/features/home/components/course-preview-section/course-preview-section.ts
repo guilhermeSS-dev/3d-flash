@@ -58,8 +58,7 @@ export class CoursePreviewSection {
 
     this.isTransitioning = true;
     this.originImage = source;
-    const sourceRect = source.getBoundingClientRect();
-    const sourceStyle = getComputedStyle(source);
+    const sourceRect = this.getRenderedImageRect(source);
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     this.selectedCourseId.set(courseId);
     this.changeDetector.detectChanges();
@@ -74,7 +73,7 @@ export class CoursePreviewSection {
 
     dialog.showModal();
     this.changeDetector.detectChanges();
-    const destinationRect = destination.getBoundingClientRect();
+    const destinationRect = this.getRenderedImageRect(destination);
     if (reducedMotion || !sourceRect.width || !destinationRect.width) {
       this.isTransitioning = false;
       return;
@@ -83,12 +82,12 @@ export class CoursePreviewSection {
     source.style.visibility = 'hidden';
     destination.style.opacity = '0';
     const layer = this.createTransitionLayer(false);
-    const movingImage = this.createMovingImage(layer, source, sourceRect, sourceStyle.objectFit, sourceStyle.objectPosition);
+    const movingImage = this.createMovingImage(layer, source, sourceRect);
     layer.showModal();
     const animation = movingImage.animate(
-      [this.transformFrame(sourceRect.left, sourceRect.top, 1, 1), this.transformFrame(
+      [this.transformFrame(sourceRect.left, sourceRect.top, 1), this.transformFrame(
         destinationRect.left, destinationRect.top,
-        destinationRect.width / sourceRect.width, destinationRect.height / sourceRect.height,
+        destinationRect.width / sourceRect.width,
       )],
       { duration: this.transitionDuration, easing: this.transitionEasing, fill: 'forwards' },
     );
@@ -116,9 +115,8 @@ export class CoursePreviewSection {
     }
 
     this.isTransitioning = true;
-    const destinationRect = destination.getBoundingClientRect();
-    const sourceRect = source.getBoundingClientRect();
-    const destinationStyle = getComputedStyle(destination);
+    const destinationRect = this.getRenderedImageRect(destination);
+    const sourceRect = this.getRenderedImageRect(source);
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reducedMotion || !sourceRect.width || !destinationRect.width) {
       dialog.close();
@@ -130,7 +128,7 @@ export class CoursePreviewSection {
     }
 
     const layer = this.createTransitionLayer(true);
-    const movingImage = this.createMovingImage(layer, destination, destinationRect, destinationStyle.objectFit, destinationStyle.objectPosition);
+    const movingImage = this.createMovingImage(layer, destination, destinationRect);
     destination.style.opacity = '0';
     source.style.visibility = 'hidden';
     layer.showModal();
@@ -139,9 +137,9 @@ export class CoursePreviewSection {
     this.changeDetector.detectChanges();
 
     const imageAnimation = movingImage.animate(
-      [this.transformFrame(destinationRect.left, destinationRect.top, 1, 1), this.transformFrame(
+      [this.transformFrame(destinationRect.left, destinationRect.top, 1), this.transformFrame(
         sourceRect.left, sourceRect.top,
-        sourceRect.width / destinationRect.width, sourceRect.height / destinationRect.height,
+        sourceRect.width / destinationRect.width,
       )],
       { duration: this.transitionDuration, easing: this.transitionEasing, fill: 'forwards' },
     );
@@ -182,9 +180,35 @@ export class CoursePreviewSection {
     return layer;
   }
 
+  /**
+   * Measures the visible image pixels, not the potentially letterboxed <img> box.
+   * This keeps the animated clone at the same aspect ratio in both endpoints.
+   */
+  private getRenderedImageRect(element: HTMLImageElement): DOMRect {
+    const box = element.getBoundingClientRect();
+    const style = getComputedStyle(element);
+    const naturalWidth = element.naturalWidth || box.width;
+    const naturalHeight = element.naturalHeight || box.height;
+
+    if (!box.width || !box.height || !naturalWidth || !naturalHeight || style.objectFit !== 'contain') {
+      return box;
+    }
+
+    const fitScale = Math.min(box.width / naturalWidth, box.height / naturalHeight);
+    const width = naturalWidth * fitScale;
+    const height = naturalHeight * fitScale;
+
+    // Both the card image and modal banner use centered object positioning.
+    return new DOMRect(
+      box.left + (box.width - width) / 2,
+      box.top + (box.height - height) / 2,
+      width,
+      height,
+    );
+  }
+
   private createMovingImage(
     layer: HTMLDialogElement, reference: HTMLImageElement, rect: DOMRect,
-    objectFit: string, objectPosition: string,
   ): HTMLImageElement {
     const image = document.createElement('img');
     image.src = reference.currentSrc || reference.src;
@@ -193,16 +217,16 @@ export class CoursePreviewSection {
     Object.assign(image.style, {
       position: 'fixed', inset: '0 auto auto 0',
       width: `${rect.width}px`, height: `${rect.height}px`,
-      objectFit, objectPosition, margin: '0', pointerEvents: 'none',
-      zIndex: '1', transformOrigin: 'top left', willChange: 'transform',
-      borderRadius: getComputedStyle(reference).borderRadius,
+      objectFit: 'fill', margin: '0', padding: '0', border: '0',
+      pointerEvents: 'none', zIndex: '1', transformOrigin: 'top left',
+      willChange: 'transform', borderRadius: '0',
     });
     image.style.transform = `translate3d(${rect.left}px, ${rect.top}px, 0)`;
     layer.append(image);
     return image;
   }
 
-  private transformFrame(x: number, y: number, scaleX: number, scaleY: number): Keyframe {
-    return { transform: `translate3d(${x}px, ${y}px, 0) scale(${scaleX}, ${scaleY})` };
+  private transformFrame(x: number, y: number, scale: number): Keyframe {
+    return { transform: `translate3d(${x}px, ${y}px, 0) scale(${scale})` };
   }
 }
