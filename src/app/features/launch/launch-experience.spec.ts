@@ -582,7 +582,7 @@ describe('Launch experience integration', () => {
     ).toBeLessThanOrEqual(366);
   });
   it('closes from any external screen area without turning that gesture into a jump', async () => {
-    config = { ...config, VIP_REWARD_THRESHOLD: 1 };
+    config = { ...config, VIP_REWARD_THRESHOLD: 1, VIP_WHATSAPP_URL: '' };
     await mount();
     start();
     flush(0);

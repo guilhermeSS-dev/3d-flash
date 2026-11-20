@@ -12,7 +12,7 @@ export const launchConfig = {
     timeoutMs: 5000,
   },
   VIP_REWARD_THRESHOLD: 7,
-  VIP_WHATSAPP_URL: '',
+  VIP_WHATSAPP_URL: 'https://chat.whatsapp.com/BPLWZt6gnVlFPvCdypdvvY?s=cl&p=i&iam=2',
   vipPickup: {
     flightSeconds: 2.2,
     reducedFlightSeconds: 0.6,
