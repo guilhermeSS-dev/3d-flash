@@ -22,7 +22,13 @@ export const launchConfig = {
   },
   storageKey: '3d-flash.launch.v1',
   countdownRefreshMs: 200,
-  reveal: { anticipationMs: 1100, durationMs: 15000, columns: 128, minTilePx: 3.5, frontierRows: 6 },
+  reveal: {
+    anticipationMs: 1100,
+    durationMs: 15000,
+    columns: 128,
+    minTilePx: 3.5,
+    frontierRows: 6,
+  },
   game: {
     width: 900,
     minWidth: 600,
