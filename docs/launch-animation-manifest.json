@@ -1,0 +1,73 @@
+{
+  "policy": "Original GIF bytes preserved; nine original RGBA frames per asset, no invented frames. Fixed union crop preserves all animation pixels. Atlas pixel round-trip verified.",
+  "animations": [
+    {
+      "id": "player",
+      "frames": 9,
+      "durations_ms": [70, 70, 70, 70, 70, 70, 70, 70, 70],
+      "loop": 0,
+      "source_crop": [30, 18, 381, 384],
+      "decoded_pixels_verified": true
+    },
+    {
+      "id": "obstacle",
+      "frames": 9,
+      "durations_ms": [90, 90, 90, 90, 90, 90, 90, 90, 90],
+      "loop": 0,
+      "source_crop": [30, 62, 395, 365],
+      "decoded_pixels_verified": true
+    },
+    {
+      "id": "bolt",
+      "frames": 9,
+      "durations_ms": [90, 90, 90, 90, 90, 90, 90, 90, 90],
+      "loop": 0,
+      "source_crop": [17, 98, 227, 619],
+      "decoded_pixels_verified": true
+    }
+  ],
+  "assets": [
+    {
+      "id": "player",
+      "kind": "original_gif",
+      "destination": "public/assets/launch/originals/player.gif",
+      "bytes": 263078,
+      "sha256": "6a8cb627453d979c56c124b7e7a0a0c5351ab5528bdaa173df815c84609ab1d9"
+    },
+    {
+      "id": "player",
+      "kind": "lossless_frame_atlas",
+      "destination": "public/assets/launch/player-atlas.png",
+      "bytes": 407947,
+      "sha256": "63bfd97d1ecf0ed9d2c221b89d642a56865098aebe29344866b9de0c6e08ff03"
+    },
+    {
+      "id": "obstacle",
+      "kind": "original_gif",
+      "destination": "public/assets/launch/originals/obstacle.gif",
+      "bytes": 309100,
+      "sha256": "dee0ac06413e1a44699a0bc6a4f994a556f9cccf109966ec6b3d382340a444b2"
+    },
+    {
+      "id": "obstacle",
+      "kind": "lossless_frame_atlas",
+      "destination": "public/assets/launch/obstacle-atlas.png",
+      "bytes": 539898,
+      "sha256": "0e445508220e27c8f12cfff7055d1d73ee32556b588aa0f327c0790f29cb13be"
+    },
+    {
+      "id": "bolt",
+      "kind": "original_gif",
+      "destination": "public/assets/launch/originals/bolt.gif",
+      "bytes": 237607,
+      "sha256": "baec72c19a0bc22a1fb9df63a2eecc136e809f7738482d39df71b0d851b86fd6"
+    },
+    {
+      "id": "bolt",
+      "kind": "lossless_frame_atlas",
+      "destination": "public/assets/launch/bolt-atlas.png",
+      "bytes": 366691,
+      "sha256": "4f37265fc3f12fbff7c92daf0556a6f33ffd6ddd77b9417bd9a74a2f3383f9fa"
+    }
+  ]
+}

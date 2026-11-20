@@ -82,6 +82,22 @@ for (const asset of assets.assets) {
     );
   verifiedAssets++;
 }
+// Verify the new launch resources without changing the landing's asset inventory.
+const launchAssets = JSON.parse(
+  await readFile(resolve(root, 'docs/launch-animation-manifest.json'), 'utf8'),
+);
+for (const asset of launchAssets.assets) {
+  const path = await requireFile(asset.destination.replace(/^public\//, ''));
+  if (digest(await readFile(path)) !== asset.sha256)
+    fail(`Asset de lançamento alterado: ${asset.destination}`);
+}
+for (const name of [
+  'Bungee-Regular.woff2',
+  'Bungee-LICENSE.txt',
+  'Silkscreen-Regular.woff2',
+  'Silkscreen-LICENSE.txt',
+])
+  await requireFile('assets/fonts/' + name);
 await requireFile('3rdpartylicenses.txt');
 const report = {
   schema_version: 1,
@@ -90,6 +106,7 @@ const report = {
   entry_references: [...new Set(entryReferences)],
   chunk_references_verified: chunkReferences,
   original_assets_verified: verifiedAssets,
+  launch_animation_assets_verified: launchAssets.assets.length,
   files: inventory,
 };
 console.log(JSON.stringify(report, null, 2));

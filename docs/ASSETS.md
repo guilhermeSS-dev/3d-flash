@@ -34,7 +34,7 @@ O caminho de origem completo, dimensões, modo de cor, tamanho e SHA-256 de orig
 
 ## Pendências e limites de fidelidade
 
-- **Pessoa original:** `pessoa-original.png` contém o xadrez incorporado aos pixels e permanece fora do Hero. A imagem enviada posteriormente, `pessoa.jpeg`, é a imagem efetivamente usada no Hero.
+- **Pessoa original:** `pessoa-original.png` contém o xadrez incorporado aos pixels e permanece fora do Hero. A imagem ativa é `pessoa-hero-transparente.png`, preparada a partir do novo anexo do usuário com remoção do fundo branco. `pessoa.jpeg` permanece preservada como versão anterior.
 - **Chaveiro e4KC Motorsport:** o arquivo fornecido mostra “e4KC Motorsport”, enquanto a referência mostra “C4K Marketing”. A imagem divergente continua sem renderização.
 - **Elementos não fornecidos separadamente:** fundo azul, divisórias onduladas, pedestais das capinhas e ícones sociais tridimensionais. Os elementos visuais atuais são aproximações da composição original.
 - **Recortes:** os PNGs originais permanecem inalterados. As franjas/artefatos de recorte devem ser avaliados no fundo azul da implementação.
@@ -43,7 +43,7 @@ O caminho de origem completo, dimensões, modo de cor, tamanho e SHA-256 de orig
 
 ## Verificações
 
-Os 14 assets originais e seus estados de integridade permanecem descritos no manifesto. Os quatro assets adicionais têm hashes próprios no mesmo manifesto e são conferidos pelo verificador de build. Os arquivos originais não foram alterados.
+Os 14 assets originais e seus estados de integridade permanecem descritos no manifesto. Os quatro assets adicionais têm hashes próprios no mesmo manifesto e são conferidos pelo verificador de build. Os arquivos originais não foram alterados. A imagem ativa `pessoa-hero-transparente.png` (1254 × 1254, RGBA) tem seu hash de origem e de saída registrado separadamente no manifesto e também é conferida pelo build.
 
 ## Uso futuro
 

@@ -15,7 +15,7 @@ export const siteAssets = {
   },
   // Updated to the user-supplied Hero image.
   person: {
-    src: 'assets/images/pessoa.jpeg',
+    src: 'assets/images/pessoa-hero-transparente.png',
     renderAllowed: true,
   },
   keychains: [

@@ -85,3 +85,10 @@ A Etapa 7 reúne 149 testes em dezenove arquivos, incluindo integração entre v
 Execute `npm run release:check` para conferir formatação, testes, build e referências estáticas. O guia de hospedagem, fallback para `/curso`, configurações finais e manutenção está em [docs/PRODUCAO.md](docs/PRODUCAO.md). O inventário com SHA-256 do compilado fica em `docs/release-manifest.json`.
 
 A Etapa 8 entrega fontes e build em ZIPs separados para revisão. Não houve publicação. A conclusão definitiva depende dos assets corretos, dados comerciais e validação visual descritos no guia.
+
+## Tela de lançamento
+
+A experiência opcional de countdown, jogo e revelação está documentada em
+[docs/LANCAMENTO.md](docs/LANCAMENTO.md). A ativação e a data ficam em
+`src/app/core/config/launch-schedule.json`. O horário vem de uma API pública,
+com fallback para o dispositivo, sem servidor adicional.

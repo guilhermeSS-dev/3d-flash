@@ -256,6 +256,22 @@
       "sha256_destination": "f6bfe7e3eddb9320984d5709c9139dd77dfa5daae9494134fd9fad5b0a2e0355",
       "status": "user_supplied_replaces_previous_hero_asset",
       "source": "Arquivo enviado pelo usuário e versionado no repositório"
+    },
+    {
+      "prefix": 19,
+      "description": "Pessoa do Hero — imagem fornecida com fundo removido",
+      "source": "Photo-1.jpg — anexo fornecido pelo usuário em 20/11/2026",
+      "destination": "public/assets/images/pessoa-hero-transparente.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "has_alpha_channel": true,
+      "bytes": 1973541,
+      "sha256_source": "2be7f333e01d01963da1bef0eb1c86095ba57d422ceea9cbb5b956aa0ec3f9c3",
+      "sha256_destination": "d03552c5a36d7b346655a71e6ba133facba176bb901a717a36568ba377e628ab",
+      "bytes_verified_equal": false,
+      "status": "user_supplied_background_removed",
+      "processing": "Remoção do fundo branco via image_gen; PNG com transparência real. O arquivo JPEG anterior permanece preservado."
     }
   ],
   "additional_user_assets": [
