@@ -1,0 +1,45 @@
+<div class="reward-backdrop" data-no-game-input>
+  <section
+    class="reward-card"
+    role="dialog"
+    tabindex="-1"
+    aria-modal="true"
+    aria-labelledby="vip-title"
+    aria-describedby="vip-description"
+    (keydown)="key($event)"
+  >
+    <header class="reward-header">
+      <svg class="reward-icon" viewBox="0 0 64 64" fill="none" aria-hidden="true" focusable="false">
+        <path
+          d="M51 12a26 26 0 0 0-40 32L7 58l15-4A26 26 0 0 0 51 12Z"
+          stroke="currentColor"
+          stroke-width="3.7"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M24 18c-1-1-3-1-4 1-2 3-2 6-1 9 4 9 10 15 19 18 3 1 6 0 8-2l2-4c0-1-1-2-2-2l-6-3c-1 0-2 0-3 2l-2 2c-4-2-8-5-10-10l2-2c1-1 1-2 0-3l-3-6Z"
+          fill="currentColor"
+        />
+      </svg>
+      <button
+        class="reward-close"
+        type="button"
+        aria-label="Fechar conquista e continuar o jogo"
+        (click)="closed.emit()"
+      >
+        ×
+      </button>
+    </header>
+    <h2 id="vip-title">Você ganhou acesso ao nosso grupo VIP!</h2>
+    <p id="vip-description">
+      Você coletou {{ threshold() }} {{ threshold() === 1 ? 'raio' : 'raios' }}!
+    </p>
+    @if (url()) {
+      <a class="reward-link" [href]="url()" target="_blank" rel="noopener noreferrer"
+        >Acessar grupo</a
+      >
+    } @else {
+      <button class="reward-link" type="button">Acessar grupo</button>
+    }
+  </section>
+</div>

@@ -1,0 +1,92 @@
+@if (session.active()) {
+  <svg class="pixel-definitions" aria-hidden="true" focusable="false" width="0" height="0">
+    <defs>
+      <clipPath [id]="maskId" clipPathUnits="userSpaceOnUse">
+        <path data-pixel-path d="M0 0H10000V10000H0Z" />
+      </clipPath>
+    </defs>
+  </svg>
+  <div
+    class="launch-shell"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="launch-heading"
+    tabindex="-1"
+    [style.clip-path]="masking() ? 'url(#' + maskId + ')' : null"
+  >
+    <svg
+      class="launch-energy"
+      viewBox="0 0 1000 1000"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path
+        class="energy-halo"
+        d="M-30 175 C160 30 260 225 490 125 S800 45 1030 140 M-30 580 C230 440 410 650 660 530 S910 480 1030 550 M-30 970 C210 835 385 1020 650 910 S920 860 1030 930"
+      />
+      <path
+        class="energy-core"
+        d="M-30 175 C160 30 260 225 490 125 S800 45 1030 140 M-30 580 C230 440 410 650 660 530 S910 480 1030 550 M-30 970 C210 835 385 1020 650 910 S920 860 1030 930"
+      />
+    </svg>
+    <h1 id="launch-heading" class="sr-only">
+      3D Flash — Da imaginação à realidade. Lançamento em {{ dateLabel }}, {{ config.timeZone }}.
+    </h1>
+    <div class="launch-content">
+      <div class="launch-intro">
+        <img
+          class="launch-brand"
+          src="assets/images/logo.png"
+          alt="3D Flash — Impressão 3D"
+          width="2169"
+          height="725"
+          draggable="false"
+        />
+        <app-launch-countdown [units]="units()" [synchronized]="clockSynchronized()" />
+      </div>
+      <app-runner-stage
+        [mode]="mode()"
+        [clockReady]="clockSynchronized()"
+        [score]="score()"
+        [best]="best()"
+        [muted]="muted()"
+        [touch]="touchMode()"
+        [rewardOpen]="rewardOpen()"
+        [threshold]="config.VIP_REWARD_THRESHOLD"
+        [vipUrl]="vipUrl"
+        (mute)="toggleMute()"
+        (rewardClosed)="closeReward()"
+      />
+      <footer
+        class="vip-footer"
+        [inert]="rewardOpen()"
+        [attr.aria-hidden]="rewardOpen() ? true : null"
+        aria-live="polite"
+      >
+        @if (vip() && !rewardOpen()) {
+          @if (vipUrl) {
+            <a
+              class="vip-access"
+              [href]="vipUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Acesso ao grupo VIP (abre em nova aba)"
+              >Acesso ao grupo</a
+            >
+          } @else {
+            <button class="vip-access" type="button">Acesso ao grupo</button>
+          }
+        }
+      </footer>
+    </div>
+  </div>
+}
+
+@if (masking()) {
+  <svg class="pixel-depth" aria-hidden="true" focusable="false">
+    <path data-pixel-layer class="pixel-layer pixel-layer--back" />
+    <path data-pixel-layer class="pixel-layer pixel-layer--middle" />
+    <path data-pixel-layer class="pixel-layer pixel-layer--front" />
+  </svg>
+}
