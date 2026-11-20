@@ -16,6 +16,6 @@ describe('Accessible application shell', () => {
     await fixture.whenStable();
 
     expect(document.activeElement).toBe(element.querySelector('main'));
-    expect(router.url).toBe('/curso');
+    expect(router.url).toBe('/curso/iniciante');
   });
 });

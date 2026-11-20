@@ -1,0 +1,118 @@
+@font-face {
+  font-family: 'Flash Countdown';
+  src: url('../../../../public/assets/fonts/Bungee-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+:host {
+  display: block;
+  inline-size: 100%;
+  min-inline-size: 0;
+}
+.countdown {
+  --unit-gap: clamp(14px, 3vw, 34px);
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  gap: var(--unit-gap);
+  inline-size: min(100%, 34rem);
+  margin-inline: auto;
+}
+.timer-unit {
+  position: relative;
+  flex: var(--digits);
+  min-inline-size: 0;
+  text-align: center;
+}
+.unit-separator {
+  position: absolute;
+  inset-inline-start: calc(var(--unit-gap) / -2 - 3px);
+  inset-block-start: 27%;
+  font:
+    1.2rem/1 Arial,
+    sans-serif;
+  color: #adc4ce;
+}
+.numerals {
+  display: flex;
+  justify-content: center;
+  padding-block: 14px 4px;
+}
+.digit {
+  display: block;
+  min-inline-size: 0;
+  flex: 0 0 calc(100% / var(--digits));
+  inline-size: calc(100% / var(--digits));
+  animation: digit-float var(--float-duration) ease-in-out var(--float-delay) infinite alternate;
+  will-change: transform;
+}
+.digit + .digit {
+  margin-inline-start: calc(-16% / var(--digits));
+}
+.digit svg {
+  display: block;
+  inline-size: 100%;
+  overflow: visible;
+}
+.digit text {
+  font-family: 'Flash Countdown', sans-serif;
+  font-size: 110px;
+  text-anchor: middle;
+}
+.digit-depth {
+  fill: #547480;
+  stroke: none;
+}
+.digit-face {
+  fill: #f2fcff;
+  stroke: #adc4ce;
+  stroke-width: 0.4px;
+}
+.unit-label {
+  display: block;
+  margin-block-start: 0.3rem;
+  font-size: clamp(0.8rem, 1.5vw, 1rem);
+  color: #adc4ce;
+  letter-spacing: 0.04em;
+}
+@keyframes digit-float {
+  from {
+    transform: translateY(4px) rotate(-0.8deg);
+  }
+  to {
+    transform: translateY(-12px) rotate(0.8deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .digit {
+    animation: none;
+    will-change: auto;
+  }
+}
+@media (forced-colors: active) {
+  .digit-face {
+    fill: CanvasText;
+    stroke: CanvasText;
+  }
+  .digit-depth {
+    fill: Canvas;
+    stroke: CanvasText;
+  }
+  .unit-label {
+    color: CanvasText;
+  }
+}
+
+@media (max-height: 500px) and (max-width: 539px) {
+  .numerals {
+    padding-block: 12px 0;
+  }
+  .digit svg {
+    max-block-size: 7dvh;
+  }
+  .unit-label {
+    font-size: 0.75rem;
+    margin-block-start: 0.2rem;
+  }
+}

@@ -1,16 +1,23 @@
 import { TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { ViewportScroller } from '@angular/common';
 import { Title } from '@angular/platform-browser';
-import { By } from '@angular/platform-browser';
 import { Router, provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { routes } from './app.routes';
 import { siteConfig } from './core/config/site.config';
 import { EnrollmentButton } from './features/course/components/enrollment-button/enrollment-button';
+import { launchConfig } from './core/config/launch.config';
+import { LAUNCH_CONFIG } from './features/launch/launch-session.service';
 
 describe('Application routing', () => {
   beforeEach(() => {
-    TestBed.configureTestingModule({ providers: [provideRouter(routes)] });
+    TestBed.configureTestingModule({
+      providers: [
+        provideRouter(routes),
+        { provide: LAUNCH_CONFIG, useValue: { ...launchConfig, enabled: false } },
+      ],
+    });
   });
 
   it('loads the standalone home page at the root URL', async () => {
@@ -21,10 +28,11 @@ describe('Application routing', () => {
     expect(TestBed.inject(Title).getTitle()).toBe('3D Flash — Impressão 3D');
   });
 
-  it('supports direct access to /curso and navigation back through RouterLink', async () => {
+  it('redirects /curso to the beginner course and navigates back through RouterLink', async () => {
     const harness = await RouterTestingHarness.create('/curso');
-    expect(harness.routeNativeElement?.querySelector('h1')?.textContent).toBe(
-      siteConfig.course.name || 'Curso 3D Flash',
+    expect(TestBed.inject(Router).url).toBe('/curso/iniciante');
+    expect(harness.routeNativeElement?.querySelector('h1')?.textContent).toContain(
+      'Impressão 3D para iniciantes',
     );
     expect(TestBed.inject(Title).getTitle()).toBe('Curso | 3D Flash');
 
@@ -45,31 +53,42 @@ describe('Application routing', () => {
     );
   });
 
-  it('navigates to the course through both landing calls to action', async () => {
+  it('uses the Hero call to action as an anchor to the course section', async () => {
     const harness = await RouterTestingHarness.create('/');
     const router = TestBed.inject(Router);
 
-    for (let index = 0; index < 2; index++) {
-      await harness.navigateByUrl('/');
-      const links =
-        harness.routeNativeElement?.querySelectorAll<HTMLAnchorElement>('a[href="/curso"]');
-      expect(links?.length).toBe(2);
-      links?.[index]?.click();
-      await harness.fixture.whenStable();
-      expect(router.url).toBe('/curso');
-    }
+    const links = harness.routeNativeElement?.querySelectorAll<HTMLAnchorElement>(
+      '.hero-copy a[href="/#curso"]',
+    );
+    expect(links?.length).toBe(1);
+    links?.[0]?.click();
+    await harness.fixture.whenStable();
+    expect(router.url).toBe('/#curso');
   });
 
-  it('keeps unconfigured social destinations and blocked images unavailable', async () => {
+  it('loads the selected course JSON when navigating between course cards', async () => {
+    const harness = await RouterTestingHarness.create('/curso/iniciante');
+    expect(harness.routeNativeElement?.querySelector('h1')?.textContent).toContain(
+      'Impressão 3D para iniciantes',
+    );
+    expect(harness.routeNativeElement?.querySelectorAll('.module-trigger')).toHaveLength(4);
+
+    await harness.navigateByUrl('/curso/modelagem');
+    expect(harness.routeNativeElement?.querySelector('h1')?.textContent).toContain(
+      'Modelagem 3D para impressão',
+    );
+    const titles = Array.from(
+      harness.routeNativeElement?.querySelectorAll('.module-trigger span:first-child') ?? [],
+    ).map((node) => node.textContent);
+    expect(titles[0]).toContain('Fundamentos da modelagem 3D');
+  });
+
+  it('uses the supplied Hero image and keeps the mismatched keychain unavailable', async () => {
     const harness = await RouterTestingHarness.create('/');
     const page = harness.routeNativeElement;
-    const contact = page?.querySelector('#contato');
-    const buttons = contact?.querySelectorAll<HTMLButtonElement>('button');
+    const heroImage = page?.querySelector<HTMLImageElement>('[data-person-slot] img');
 
-    expect(buttons?.length).toBe(2);
-    expect(Array.from(buttons ?? []).every((button) => button.disabled)).toBe(true);
-    expect(contact?.querySelector('a')).toBeNull();
-    expect(page?.querySelector('[data-person-slot] img')).toBeNull();
+    expect(heroImage?.getAttribute('src')).toBe('assets/images/pessoa-hero-transparente.png');
     expect(page?.querySelector('[data-keychain="e4kc-motorsport"] img')).toBeNull();
   });
 
@@ -97,7 +116,7 @@ describe('Application routing', () => {
     const scroll = vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
 
     try {
-      expect(links.length).toBe(5);
+      expect(links.length).toBe(4);
       for (const link of links) {
         trigger.click();
         await harness.fixture.whenStable();
@@ -110,7 +129,6 @@ describe('Application routing', () => {
         expect(router.parseUrl(router.url).fragment).toBe(fragment);
         expect(trigger.getAttribute('aria-expanded')).toBe('false');
 
-        // Exercise public focus handling. JSDOM does not provide real scroll geometry.
         scroller.scrollToAnchor(fragment);
         expect(document.activeElement).toBe(target);
 

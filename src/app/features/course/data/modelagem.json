@@ -1,0 +1,29 @@
+{
+  "presentation": {
+    "name": "Modelagem 3D para impressão",
+    "duration": "",
+    "introduction": ""
+  },
+  "modules": [
+    {
+      "id": "module-01",
+      "title": "Módulo 01 — Fundamentos da modelagem 3D",
+      "description": "Conteúdo do módulo em atualização."
+    },
+    {
+      "id": "module-02",
+      "title": "Módulo 02 — Ferramentas de modelagem",
+      "description": "Conteúdo do módulo em atualização."
+    },
+    {
+      "id": "module-03",
+      "title": "Módulo 03 — Desenvolvimento de projetos",
+      "description": "Conteúdo do módulo em atualização."
+    },
+    {
+      "id": "module-04",
+      "title": "Módulo 04 — Preparação dos modelos para impressão",
+      "description": "Conteúdo do módulo em atualização."
+    }
+  ]
+}

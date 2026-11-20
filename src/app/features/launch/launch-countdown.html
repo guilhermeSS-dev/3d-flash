@@ -1,0 +1,29 @@
+<div class="countdown" role="timer" aria-label="Tempo até o lançamento" aria-live="off">
+  @for (unit of groups(); track unit.label) {
+    <div class="timer-unit" [style.--digits]="unit.digits.length">
+      @if (unit.index > 0) {
+        <span class="unit-separator" aria-hidden="true">:</span>
+      }
+      <span class="sr-only">{{ synchronized() ? unit.value : 'Aguardando' }} {{ unit.label }}</span>
+      <div class="numerals" aria-hidden="true">
+        @for (digit of unit.digits; track $index; let i = $index) {
+          <span
+            class="digit"
+            [style.--float-duration]="4.2 + ((unit.index * 10 + i) % 5) * 0.35 + 's'"
+            [style.--float-delay]="-0.7 * (unit.index * 10 + i) + 's'"
+          >
+            <svg viewBox="0 0 108 126" focusable="false">
+              @for (depth of depths; track depth) {
+                <text class="digit-depth" [attr.x]="48 + depth" [attr.y]="100 + depth">
+                  {{ digit }}
+                </text>
+              }
+              <text class="digit-face" x="48" y="100">{{ digit }}</text>
+            </svg>
+          </span>
+        }
+      </div>
+      <span class="unit-label" aria-hidden="true">{{ unit.label }}</span>
+    </div>
+  }
+</div>

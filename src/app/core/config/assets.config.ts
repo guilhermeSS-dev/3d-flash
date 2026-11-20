@@ -1,18 +1,21 @@
-import { TestRequest } from '@angular/common/http/testing';
 import { KeychainAsset } from '../models/keychain-asset';
 
 export const siteAssets = {
   logo: 'assets/images/logo.png',
   menu: 'assets/icons/menu-raios.png',
   qrStand: 'assets/images/plaquinha-qr.png',
+  courses: {
+    beginner: 'assets/images/iniciante.jpeg',
+    modeling: 'assets/images/modelagem.jpeg',
+  },
+  productsBanner: 'assets/images/produtos_banner.jpeg',
   phoneCase: {
     digital: 'assets/images/capinha-digital.png',
     physical: 'assets/images/capinha-fisica.png',
   },
-  // Original contains a baked-in checkerboard. Do not render it as a cutout.
+  // Updated to the user-supplied Hero image.
   person: {
-    src: 'assets/images/pessoa-original.png',
-    status: 'pending-transparency',
+    src: 'assets/images/pessoa-hero-transparente.png',
     renderAllowed: true,
   },
   keychains: [

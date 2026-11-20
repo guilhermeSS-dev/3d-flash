@@ -1,3 +1,4 @@
+import { LaunchSessionService } from '../../../launch/launch-session.service';
 import {
   afterNextRender,
   ChangeDetectionStrategy,
@@ -36,6 +37,8 @@ export class FloatingKeychains {
   private readonly element = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly zone = inject(NgZone);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly launchSession = inject(LaunchSessionService);
+  private cancelLaunchWait: () => void = () => {};
   private cleanup: () => void = () => {};
   private route: KeychainRouteController | undefined;
   private scroll: KeychainScrollController | undefined;
@@ -43,39 +46,44 @@ export class FloatingKeychains {
 
   constructor() {
     afterNextRender(() => {
-      this.zone.runOutsideAngular(() => {
-        const root = this.element.nativeElement;
-        const layout = root.closest<HTMLElement>('[data-keychain-layout]');
-        const cleanupFloat = setupKeychainFloat(root, layout ?? root);
-        if (layout) {
-          const svg = layout.querySelector<SVGSVGElement>('[data-electric-trail]');
-          if (svg) this.trail = setupElectricTrail(svg, layout);
-          this.route = setupKeychainRouteLayout(layout, root, {
-            onGeometryChange: () => {
-              const snapshot = this.route?.getSnapshot();
-              this.trail?.refresh(snapshot?.route?.valid ? snapshot.geometry : undefined);
-              this.scroll?.refresh();
-              const view = root.ownerDocument.defaultView;
-              if (typeof view?.matchMedia !== 'function') return;
-              // Layout reservations also move the existing section/case animation triggers.
-              gsap.registerPlugin(ScrollTrigger);
-              ScrollTrigger.refresh();
-            },
-          });
-          const snapshot = this.route.getSnapshot();
-          this.trail?.refresh(snapshot.route?.valid ? snapshot.geometry : undefined);
-          this.scroll = setupKeychainScroll(root, layout, this.route, {
-            onFrame: (frame) => this.trail?.update(frame),
-          });
-        }
-        this.cleanup = () => {
-          this.scroll?.destroy();
-          this.trail?.destroy();
-          this.route?.destroy();
-          cleanupFloat();
-        };
+      this.cancelLaunchWait = this.launchSession.whenReady(() => {
+        this.zone.runOutsideAngular(() => {
+          const root = this.element.nativeElement;
+          const layout = root.closest<HTMLElement>('[data-keychain-layout]');
+          const cleanupFloat = setupKeychainFloat(root, layout ?? root);
+          if (layout) {
+            const svg = layout.querySelector<SVGSVGElement>('[data-electric-trail]');
+            if (svg) this.trail = setupElectricTrail(svg, layout);
+            this.route = setupKeychainRouteLayout(layout, root, {
+              onGeometryChange: () => {
+                const snapshot = this.route?.getSnapshot();
+                this.trail?.refresh(snapshot?.route?.valid ? snapshot.geometry : undefined);
+                this.scroll?.refresh();
+                const view = root.ownerDocument.defaultView;
+                if (typeof view?.matchMedia !== 'function') return;
+                // Layout reservations also move the existing section/case animation triggers.
+                gsap.registerPlugin(ScrollTrigger);
+                ScrollTrigger.refresh();
+              },
+            });
+            const snapshot = this.route.getSnapshot();
+            this.trail?.refresh(snapshot.route?.valid ? snapshot.geometry : undefined);
+            this.scroll = setupKeychainScroll(root, layout, this.route, {
+              onFrame: (frame) => this.trail?.update(frame),
+            });
+          }
+          this.cleanup = () => {
+            this.scroll?.destroy();
+            this.trail?.destroy();
+            this.route?.destroy();
+            cleanupFloat();
+          };
+        });
       });
     });
-    this.destroyRef.onDestroy(() => this.cleanup());
+    this.destroyRef.onDestroy(() => {
+      this.cancelLaunchWait();
+      this.cleanup();
+    });
   }
 }

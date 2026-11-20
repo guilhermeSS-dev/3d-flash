@@ -1,0 +1,48 @@
+<section id="produtos" class="products-section" aria-labelledby="products-title" tabindex="-1">
+  <div class="section-inner products-inner">
+    <div class="products-heading">
+      <p class="section-label">LOJA 3D FLASH</p>
+      <h2 id="products-title" class="display-heading">
+        Encontre tudo para suas
+        <span class="accent-text">próximas criações.</span>
+      </h2>
+    </div>
+
+    <div class="products-banner-wrap">
+      @if (config.links.productCatalog) {
+        <a
+          class="products-banner"
+          [href]="config.links.productCatalog"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Acessar catálogo de produtos da 3D Flash na Shopee (abre em nova aba)"
+        >
+          <img
+            [src]="assets.productsBanner"
+            alt="Produtos da 3D Flash para impressão 3D — confira na Shopee"
+            width="1024"
+            height="1536"
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
+      } @else {
+        <div
+          class="products-banner products-banner--unavailable"
+          role="img"
+          aria-label="Banner do catálogo de produtos da 3D Flash na Shopee"
+        >
+          <img
+            [src]="assets.productsBanner"
+            alt=""
+            width="1024"
+            height="1536"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <p class="catalog-status">O link do catálogo será disponibilizado em breve.</p>
+      }
+    </div>
+  </div>
+</section>

@@ -1,3 +1,5 @@
+import { LaunchExperience } from '../../../launch/launch-experience';
+import { LaunchSessionService } from '../../../launch/launch-session.service';
 import {
   afterNextRender,
   ChangeDetectionStrategy,
@@ -14,6 +16,7 @@ import { SectionDivider } from '../../../../shared/components/section-divider/se
 import { HeroSection } from '../../components/hero-section/hero-section';
 import { AboutSection } from '../../components/about-section/about-section';
 import { CoursePreviewSection } from '../../components/course-preview-section/course-preview-section';
+import { ProductsSection } from '../../components/products-section/products-section';
 import { ContactSection } from '../../components/contact-section/contact-section';
 import { FooterSection } from '../../components/footer-section/footer-section';
 import { ElectricTrail } from '../../components/electric-trail/electric-trail';
@@ -21,9 +24,11 @@ import { ElectricTrail } from '../../components/electric-trail/electric-trail';
 @Component({
   selector: 'app-home-page',
   imports: [
+    LaunchExperience,
     HeroSection,
     AboutSection,
     CoursePreviewSection,
+    ProductsSection,
     ContactSection,
     FooterSection,
     SectionDivider,
@@ -35,20 +40,27 @@ import { ElectricTrail } from '../../components/electric-trail/electric-trail';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomePage {
+  protected readonly launch = inject(LaunchSessionService);
   private readonly element = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly session = inject(AnimationSessionService);
   private readonly zone = inject(NgZone);
   private readonly destroyRef = inject(DestroyRef);
+  private cancelLaunchWait: () => void = () => {};
   private cleanup: () => void = () => {};
 
   constructor() {
     afterNextRender(() => {
-      this.zone.runOutsideAngular(() => {
-        this.cleanup = setupHomeEntrances(this.element.nativeElement, (id) =>
-          this.session.claimEntrance(id),
-        );
+      this.cancelLaunchWait = this.launch.whenReady(() => {
+        this.zone.runOutsideAngular(() => {
+          this.cleanup = setupHomeEntrances(this.element.nativeElement, (id) =>
+            this.session.claimEntrance(id),
+          );
+        });
       });
     });
-    this.destroyRef.onDestroy(() => this.cleanup());
+    this.destroyRef.onDestroy(() => {
+      this.cancelLaunchWait();
+      this.cleanup();
+    });
   }
 }

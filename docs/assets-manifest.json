@@ -220,6 +220,88 @@
       "sha256_destination": "76cef778abab75f29e051da3f37647363a6c53dc0b6481d3d2de6d77a519b4b6",
       "bytes_verified_equal": true,
       "status": "reference_only"
+    },
+    {
+      "prefix": 15,
+      "description": "Card do curso Iniciante",
+      "destination": "public/assets/images/iniciante.jpeg",
+      "bytes": 244180,
+      "sha256_destination": "c0e41378391c65446f8d6435aa578a4fc9eb207387344f0ba91c8b53940d97dc",
+      "status": "user_supplied",
+      "source": "Arquivo enviado pelo usuário e versionado no repositório"
+    },
+    {
+      "prefix": 16,
+      "description": "Card do curso Modelagem",
+      "destination": "public/assets/images/modelagem.jpeg",
+      "bytes": 286188,
+      "sha256_destination": "1c94a80fe53b6822906fb0290889f9e7a29c7f682a184679997032f660e7b51c",
+      "status": "user_supplied",
+      "source": "Arquivo enviado pelo usuário e versionado no repositório"
+    },
+    {
+      "prefix": 17,
+      "description": "Banner de produtos Shopee",
+      "destination": "public/assets/images/produtos_banner.jpeg",
+      "bytes": 290196,
+      "sha256_destination": "95db6b39dc61fb20607f2ea8d8ef29976d053fc3c836ea8e6f3213b179eb426a",
+      "status": "user_supplied",
+      "source": "Arquivo enviado pelo usuário e versionado no repositório"
+    },
+    {
+      "prefix": 18,
+      "description": "Nova imagem do Hero",
+      "destination": "public/assets/images/pessoa.jpeg",
+      "bytes": 223056,
+      "sha256_destination": "f6bfe7e3eddb9320984d5709c9139dd77dfa5daae9494134fd9fad5b0a2e0355",
+      "status": "user_supplied_replaces_previous_hero_asset",
+      "source": "Arquivo enviado pelo usuário e versionado no repositório"
+    },
+    {
+      "prefix": 19,
+      "description": "Pessoa do Hero — imagem fornecida com fundo removido",
+      "source": "Photo-1.jpg — anexo fornecido pelo usuário em 20/11/2026",
+      "destination": "public/assets/images/pessoa-hero-transparente.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "has_alpha_channel": true,
+      "bytes": 1973541,
+      "sha256_source": "2be7f333e01d01963da1bef0eb1c86095ba57d422ceea9cbb5b956aa0ec3f9c3",
+      "sha256_destination": "d03552c5a36d7b346655a71e6ba133facba176bb901a717a36568ba377e628ab",
+      "bytes_verified_equal": false,
+      "status": "user_supplied_background_removed",
+      "processing": "Remoção do fundo branco via image_gen; PNG com transparência real. O arquivo JPEG anterior permanece preservado."
+    }
+  ],
+  "additional_user_assets": [
+    {
+      "description": "Card do curso Iniciante",
+      "destination": "public/assets/images/iniciante.jpeg",
+      "bytes": 244180,
+      "sha256_destination": "2ba78082292a1ed12712f7183ea98e8bba20a97eea74ca780e1acc364b53369d",
+      "status": "user_supplied"
+    },
+    {
+      "description": "Card do curso Modelagem",
+      "destination": "public/assets/images/modelagem.jpeg",
+      "bytes": 286188,
+      "sha256_destination": "d350cab3fd24c2be6e57d6e03bf6ccc173055d5d45e7517c13bed2bf36a6895e",
+      "status": "user_supplied"
+    },
+    {
+      "description": "Banner de produtos Shopee",
+      "destination": "public/assets/images/produtos_banner.jpeg",
+      "bytes": 290196,
+      "sha256_destination": "f9e0d251ae9d3b1738619a6c0dc219f37951842fd16ca9b2f04403af7b14e8d3",
+      "status": "user_supplied"
+    },
+    {
+      "description": "Nova imagem do Hero",
+      "destination": "public/assets/images/pessoa.jpeg",
+      "bytes": 223056,
+      "sha256_destination": "a6badde47c582653b5f90d8fe944c2d8e61f7ea165ed6eb47ed9d03d20eadf97",
+      "status": "user_supplied_replaces_previous_hero_asset"
     }
   ]
 }

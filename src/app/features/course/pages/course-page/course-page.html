@@ -10,7 +10,7 @@
       />
     </header>
 
-    <app-course-info [presentation]="config.course" />
+    <app-course-info [presentation]="presentation()" />
 
     <div class="enrollment-placement">
       <app-enrollment-button [destination]="config.links.hotmart" />
@@ -19,9 +19,9 @@
     <section class="course-modules" aria-labelledby="modules-heading">
       <div class="modules-header">
         <h2 id="modules-heading">Módulos do curso</h2>
-        <p class="provisional-note">Conteúdo provisório.</p>
+        <p class="provisional-note">Conteúdo programático em atualização.</p>
       </div>
-      <app-course-accordion [modules]="modules" />
+      <app-course-accordion [modules]="modules()" />
     </section>
 
     <div class="enrollment-placement enrollment-placement--bottom">

@@ -1,0 +1,41 @@
+name: Validate develop
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-develop-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test:ci
+
+      - name: Build for GitHub Pages
+        run: npm run build -- --base-href /3d-flash/
+
+      - name: Verify build artifacts and asset integrity
+        run: npm run verify:build

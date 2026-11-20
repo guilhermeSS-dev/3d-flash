@@ -2,10 +2,19 @@ import { TestBed } from '@angular/core/testing';
 import { Router, provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { routes } from './app.routes';
+import { launchConfig } from './core/config/launch.config';
+import { LAUNCH_CONFIG } from './features/launch/launch-session.service';
 
 /** DOM-level accessibility checks; not a screen-reader, contrast or rendered-layout audit. */
 describe('Application acceptance structure', () => {
-  beforeEach(() => TestBed.configureTestingModule({ providers: [provideRouter(routes)] }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      providers: [
+        provideRouter(routes),
+        { provide: LAUNCH_CONFIG, useValue: { ...launchConfig, enabled: false } },
+      ],
+    }),
+  );
 
   it.each(['/', '/curso'])(
     'keeps IDs, accessible references and control names consistent on %s',
@@ -41,13 +50,14 @@ describe('Application acceptance structure', () => {
     },
   );
 
-  it('preserves exactly four home sections and the footer with non-interactive decorations', async () => {
+  it('preserves the five home sections and the footer with non-interactive decorations', async () => {
     const harness = await RouterTestingHarness.create('/');
     const page = harness.routeNativeElement!;
     expect(Array.from(page.querySelectorAll('section[id]')).map((node) => node.id)).toEqual([
       'inicio',
       'sobre',
       'curso',
+      'produtos',
       'contato',
     ]);
     expect(page.querySelectorAll('footer#rodape')).toHaveLength(1);
@@ -58,6 +68,16 @@ describe('Application acceptance structure', () => {
     const overlay = page.querySelector('app-electric-trail')!;
     expect(overlay.getAttribute('aria-hidden')).toBe('true');
     expect(overlay.querySelector('svg')!.getAttribute('focusable')).toBe('false');
+  });
+
+  it('renders the Shopee products banner and keeps its link unavailable until configured', async () => {
+    const harness = await RouterTestingHarness.create('/');
+    const products = harness.routeNativeElement?.querySelector('#produtos');
+    expect(products?.querySelector('img')?.getAttribute('src')).toBe(
+      'assets/images/produtos_banner.jpeg',
+    );
+    expect(products?.querySelector('a[href]')).toBeNull();
+    expect(products?.textContent).toContain('link do catálogo será disponibilizado em breve');
   });
 
   it('repeated route navigation never duplicates menus, electric overlays or page headings', async () => {
