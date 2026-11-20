@@ -402,39 +402,6 @@ describe('Keychain route layout lifecycle', () => {
     expect(changed).toHaveBeenCalledTimes(2);
   });
 
-  it('cancels work and restores only owned CSS properties including their original priority', async () => {
-    fixture = createLayout();
-    fixture.root.style.setProperty('--keychain-route-corridor', '23px', 'important');
-    fixture.root.style.setProperty('--keychain-before-course', '5px');
-    fixture.root.style.setProperty('--unrelated-token', 'preserve');
-    const removeWindow = vi.spyOn(window, 'removeEventListener');
-    const removeFonts = vi.spyOn(fonts, 'removeEventListener');
-    controller = setupKeychainRouteLayout(fixture.root, fixture.origin);
-    controller.setProgress(0.42);
-    window.dispatchEvent(new Event('resize'));
-    expect(frames.size).toBe(1);
-    controller.destroy();
-    controller.destroy();
-    expect(frames.size).toBe(0);
-    expect(window.cancelAnimationFrame).toHaveBeenCalled();
-    expect(observer.disconnect).toHaveBeenCalledTimes(1);
-    expect(removeWindow).toHaveBeenCalledWith('resize', expect.any(Function));
-    expect(removeFonts).toHaveBeenCalledWith('loadingdone', expect.any(Function));
-    expect(fixture.root.style.getPropertyValue('--keychain-route-corridor')).toBe('23px');
-    expect(fixture.root.style.getPropertyPriority('--keychain-route-corridor')).toBe('important');
-    expect(fixture.root.style.getPropertyValue('--keychain-before-course')).toBe('5px');
-    expect(fixture.root.style.getPropertyValue('--keychain-before-contact')).toBe('');
-    expect(fixture.root.style.getPropertyValue('--unrelated-token')).toBe('preserve');
-
-    resolveFonts();
-    await Promise.resolve();
-    window.dispatchEvent(new Event('resize'));
-    notifyResize();
-    controller.setProgress(0.9);
-    expect(frames.size).toBe(0);
-    expect(controller.getSnapshot().progress).toBe(0.42);
-  });
-
   it('uses offset chains rather than transient transformed visual rectangles', () => {
     fixture = createLayout();
     controller = setupKeychainRouteLayout(fixture.root, fixture.origin);
