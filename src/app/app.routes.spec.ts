@@ -81,7 +81,7 @@ describe('Application routing', () => {
     const page = harness.routeNativeElement;
     const heroImage = page?.querySelector<HTMLImageElement>('[data-person-slot] img');
 
-    expect(heroImage?.getAttribute('src')).toBe('assets/images/pessoa.jpeg');
+    expect(heroImage?.getAttribute('src')).toBe('assets/images/pessoa-hero-transparente.png');
     expect(page?.querySelector('[data-keychain="e4kc-motorsport"] img')).toBeNull();
   });
 
