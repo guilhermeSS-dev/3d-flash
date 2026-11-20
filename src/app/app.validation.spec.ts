@@ -2,10 +2,19 @@ import { TestBed } from '@angular/core/testing';
 import { Router, provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { routes } from './app.routes';
+import { launchConfig } from './core/config/launch.config';
+import { LAUNCH_CONFIG } from './features/launch/launch-session.service';
 
 /** DOM-level accessibility checks; not a screen-reader, contrast or rendered-layout audit. */
 describe('Application acceptance structure', () => {
-  beforeEach(() => TestBed.configureTestingModule({ providers: [provideRouter(routes)] }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      providers: [
+        provideRouter(routes),
+        { provide: LAUNCH_CONFIG, useValue: { ...launchConfig, enabled: false } },
+      ],
+    }),
+  );
 
   it.each(['/', '/curso'])(
     'keeps IDs, accessible references and control names consistent on %s',

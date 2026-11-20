@@ -90,14 +90,22 @@ describe('Launch experience integration', () => {
       width: 390,
       height: 800,
     } as DOMRect);
-    vi.stubGlobal(
-      'matchMedia',
-      vi.fn(() => ({ matches: false, addListener: vi.fn(), removeListener: vi.fn() })),
-    );
+    Object.defineProperty(window, 'matchMedia', {
+      configurable: true,
+      writable: true,
+      value: vi.fn(() => ({
+        matches: false,
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+      })),
+    });
     localStorage.clear();
     config = {
       ...launchConfig,
       enabled: true,
+      launchAt: '2030-12-01T23:00:00Z',
       countdownRefreshMs: 10,
       reveal: { ...launchConfig.reveal, anticipationMs: 0, durationMs: 20 },
       rendering: { ...launchConfig.rendering, removeConnectedBackground: false },

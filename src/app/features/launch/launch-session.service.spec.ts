@@ -23,7 +23,12 @@ describe('Launch gate preserves mounted home components', () => {
   function setup(enabled: boolean, now: string) {
     vi.spyOn(Date, 'now').mockReturnValue(Date.parse(now));
     TestBed.configureTestingModule({
-      providers: [{ provide: LAUNCH_CONFIG, useValue: { ...launchConfig, enabled } }],
+      providers: [
+        {
+          provide: LAUNCH_CONFIG,
+          useValue: { ...launchConfig, enabled, launchAt: '2030-12-01T23:00:00Z' },
+        },
+      ],
     });
     return TestBed.inject(LaunchSessionService);
   }
@@ -59,7 +64,12 @@ describe('Prepared landing remains protected until pixel reveal ends', () => {
   it('starts landing resources only at launch preparation without unlocking background focus early', () => {
     vi.spyOn(Date, 'now').mockReturnValue(Date.parse('2030-12-01T22:00:00Z'));
     TestBed.configureTestingModule({
-      providers: [{ provide: LAUNCH_CONFIG, useValue: { ...launchConfig, enabled: true } }],
+      providers: [
+        {
+          provide: LAUNCH_CONFIG,
+          useValue: { ...launchConfig, enabled: true, launchAt: '2030-12-01T23:00:00Z' },
+        },
+      ],
     });
     const gate = TestBed.inject(LaunchSessionService),
       first = vi.fn(),

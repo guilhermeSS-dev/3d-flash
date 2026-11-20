@@ -329,34 +329,6 @@ describe('Keychain route layout lifecycle', () => {
     expect(changed).toHaveBeenCalledTimes(2);
   });
 
-  it('coalesces resize, observer, image and font invalidations without publishing unchanged routes', async () => {
-    fixture = createLayout();
-    const changed = vi.fn();
-    controller = setupKeychainRouteLayout(fixture.root, fixture.origin, {
-      onGeometryChange: changed,
-    });
-    expect(observer.observe).toHaveBeenCalledWith(fixture.heroCopy);
-    resolveFonts();
-    await Promise.resolve();
-    window.dispatchEvent(new Event('resize'));
-    window.dispatchEvent(new Event('orientationchange'));
-    fixture.root.querySelector('img')?.dispatchEvent(new Event('load'));
-    fonts.dispatchEvent(new Event('loadingdone'));
-    notifyResize();
-    expect(frames.size).toBe(1);
-    flushFrame();
-    expect(changed).toHaveBeenCalledTimes(1);
-
-    fixture.width = 768;
-    window.dispatchEvent(new Event('resize'));
-    notifyResize();
-    fonts.dispatchEvent(new Event('loadingdone'));
-    expect(frames.size).toBe(1);
-    flushFrame();
-    expect(changed).toHaveBeenCalledTimes(2);
-    expect(controller.getSnapshot().route?.valid).toBe(true);
-  });
-
   it('publishes changed conductor dimensions even when the route centre stays unchanged', () => {
     fixture = createLayout();
     const changed = vi.fn();

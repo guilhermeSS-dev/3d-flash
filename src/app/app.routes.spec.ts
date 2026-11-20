@@ -7,10 +7,17 @@ import { RouterTestingHarness } from '@angular/router/testing';
 import { routes } from './app.routes';
 import { siteConfig } from './core/config/site.config';
 import { EnrollmentButton } from './features/course/components/enrollment-button/enrollment-button';
+import { launchConfig } from './core/config/launch.config';
+import { LAUNCH_CONFIG } from './features/launch/launch-session.service';
 
 describe('Application routing', () => {
   beforeEach(() => {
-    TestBed.configureTestingModule({ providers: [provideRouter(routes)] });
+    TestBed.configureTestingModule({
+      providers: [
+        provideRouter(routes),
+        { provide: LAUNCH_CONFIG, useValue: { ...launchConfig, enabled: false } },
+      ],
+    });
   });
 
   it('loads the standalone home page at the root URL', async () => {

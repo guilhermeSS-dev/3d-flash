@@ -153,17 +153,20 @@ export class LaunchExperience {
       preferTouchInput(
         navigator.userAgent,
         navigator.maxTouchPoints || 0,
-        window.matchMedia('(pointer: coarse)').matches,
+        this.matchesMedia('(pointer: coarse)'),
       ),
     );
-    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    this.reducedMotion = motion.matches;
+    const motion =
+      typeof window.matchMedia === 'function'
+        ? window.matchMedia('(prefers-reduced-motion: reduce)')
+        : undefined;
+    this.reducedMotion = motion?.matches ?? false;
     const motionChanged = () => {
-      this.reducedMotion = motion.matches;
+      this.reducedMotion = motion?.matches ?? false;
       this.draw();
     };
-    motion.addEventListener?.('change', motionChanged);
-    this.cleanups.push(() => motion.removeEventListener?.('change', motionChanged));
+    motion?.addEventListener?.('change', motionChanged);
+    this.cleanups.push(() => motion?.removeEventListener?.('change', motionChanged));
     this.resize();
     if (typeof ResizeObserver !== 'undefined' && this.canvas) {
       this.observer = new ResizeObserver(() => this.resize());
@@ -385,7 +388,7 @@ export class LaunchExperience {
       introHeight: intro.getBoundingClientRect().height,
       footerHeight: footer.getBoundingClientRect().height,
       gap: parseFloat(getComputedStyle(container).rowGap) || 12,
-      desktop: window.matchMedia(DESKTOP_LAUNCH_MEDIA).matches,
+      desktop: this.matchesMedia(DESKTOP_LAUNCH_MEDIA),
     });
     container.classList.toggle('launch-content--wide', layout.wide);
     container.style.setProperty('--stage-size', layout.size + 'px');
@@ -429,6 +432,11 @@ export class LaunchExperience {
     this.audio.unlock();
     if (this.mode() === 'ready' || this.mode() === 'over') this.play();
     if (this.engine.running) this.engine.jump();
+  }
+  private matchesMedia(query: string): boolean {
+    return typeof window.matchMedia === 'function'
+      ? window.matchMedia(query).matches
+      : false;
   }
   protected play(): void {
     if (this.disposed || this.releasing || !['ready', 'over'].includes(this.mode())) return;
@@ -490,7 +498,7 @@ export class LaunchExperience {
         this.pickup.start(
           this.engine.width,
           this.config.game.ground,
-          window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+          this.matchesMedia('(prefers-reduced-motion: reduce)'),
         );
       this.syncReward();
       saveReward(this.storage, this.reward, this.config.storageKey);
@@ -613,7 +621,7 @@ export class LaunchExperience {
     if (this.clockTimer) clearTimeout(this.clockTimer);
     this.audio.close();
     this.abort.abort();
-    if (document.hidden || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (document.hidden || this.matchesMedia('(prefers-reduced-motion: reduce)')) {
       this.finish();
       return;
     }

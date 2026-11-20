@@ -9,6 +9,8 @@ import { launchConfig } from '../../core/config/launch.config';
 import { AnimationSessionService } from '../../core/services/animation-session.service';
 import { LAUNCH_CONFIG, LaunchSessionService } from './launch-session.service';
 
+const testLaunchAt = '2030-12-01T23:00:00Z';
+
 // Legacy UI scenarios use a deterministic clock; trusted-clock behavior is tested separately.
 beforeEach(() => {
   TestBed.configureTestingModule({
@@ -30,15 +32,18 @@ describe('Waiting layer and existing home integration', () => {
   beforeEach(() => {
     wall = Date.parse('2030-12-01T22:59:00Z');
     vi.spyOn(Date, 'now').mockImplementation(() => wall);
-    vi.stubGlobal(
-      'matchMedia',
-      vi.fn((query: string) => ({
+    Object.defineProperty(window, 'matchMedia', {
+      configurable: true,
+      writable: true,
+      value: vi.fn((query: string) => ({
         matches: query.includes('prefers-reduced-motion: reduce'),
         media: query,
         addListener: vi.fn(),
         removeListener: vi.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
       })),
-    );
+    });
     vi.spyOn(HTMLCanvasElement.prototype, 'getContext').mockReturnValue(null);
     vi.spyOn(window, 'scrollTo').mockImplementation(() => {});
     vi.spyOn(gsap, 'registerPlugin').mockImplementation(() => {});
@@ -48,7 +53,12 @@ describe('Waiting layer and existing home integration', () => {
         provideRouter(routes),
         {
           provide: LAUNCH_CONFIG,
-          useValue: { ...launchConfig, enabled: true, countdownRefreshMs: 10 },
+          useValue: {
+            ...launchConfig,
+            enabled: true,
+            launchAt: testLaunchAt,
+            countdownRefreshMs: 10,
+          },
         },
       ],
     });
@@ -85,7 +95,7 @@ describe('Waiting layer and existing home integration', () => {
     const home = harness.routeNativeElement!.querySelector('.home-page');
     const entrance = vi.spyOn(TestBed.inject(AnimationSessionService), 'claimEntrance');
     expect(entrance).not.toHaveBeenCalled();
-    wall = Date.parse(launchConfig.launchAt);
+    wall = Date.parse(testLaunchAt);
     await new Promise((resolve) => setTimeout(resolve, 30));
     await harness.fixture.whenStable();
     expect(harness.routeNativeElement!.querySelector('.home-page')).toBe(home);
