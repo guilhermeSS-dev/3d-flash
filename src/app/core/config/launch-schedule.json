@@ -1,5 +1,5 @@
 {
-  "enabled": false,
-  "launchAt": "2030-12-01T20:00:00-03:00",
+  "enabled": true,
+  "launchAt": "2026-11-20T15:20:00-03:00",
   "timeZone": "America/Sao_Paulo"
 }
