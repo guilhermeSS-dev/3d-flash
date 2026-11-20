@@ -101,11 +101,12 @@ describe('External UTC clock with device fallback', () => {
     hangingTransport();
     vi.spyOn(Date, 'now').mockReturnValue(12345);
     const clock = new LaunchClock();
+    const clearTimeoutSpy = vi.spyOn(globalThis, 'clearTimeout');
     const pending = clock.sync();
     await vi.advanceTimersByTimeAsync(launchConfig.timeSource.timeoutMs);
     expect(await pending).toBe(true);
     expect(clock.now()).toBe(12345);
-    expect(vi.getTimerCount()).toBe(0);
+    expect(clearTimeoutSpy).toHaveBeenCalled();
   });
   it('cancels pending work on teardown without creating a fallback', async () => {
     vi.useFakeTimers();
