@@ -2,6 +2,7 @@ export interface SiteLinks {
   readonly instagram: string;
   readonly whatsapp: string;
   readonly hotmart: string;
+  readonly stlLibrary: string;
   readonly productCatalog: string;
   readonly course: '/curso';
 }

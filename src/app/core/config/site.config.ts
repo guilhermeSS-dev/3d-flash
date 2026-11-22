@@ -11,6 +11,7 @@ export const siteConfig = {
     instagram: '',
     whatsapp: '',
     hotmart: '',
+    stlLibrary: 'https://makerworld.com/en/@gustavonatan?appSharePlatform=copy',
     productCatalog: 'https://collshp.com/3dflash.oficial?view=storefront',
     course: '/curso',
   },

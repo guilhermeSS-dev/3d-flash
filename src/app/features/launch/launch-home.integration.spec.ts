@@ -71,7 +71,7 @@ describe('Waiting layer and existing home integration', () => {
   it('keeps the current landing, products and course links mounted and inert', async () => {
     const harness = await RouterTestingHarness.create('/');
     const root = harness.routeNativeElement!;
-    expect(root.querySelectorAll('section[id]')).toHaveLength(5);
+    expect(root.querySelectorAll('section[id]')).toHaveLength(6);
     expect(root.querySelector('.home-page')).not.toBeNull();
     expect(root.querySelector('app-products-section')).not.toBeNull();
     expect(root.querySelectorAll('.course-card')).toHaveLength(2);

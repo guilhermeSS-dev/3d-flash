@@ -317,6 +317,21 @@
       "sha256_destination": "cd51e589ab2dab7e66ae96d6e4e49fd14ad5fe4a8cd679a340b204ac16cb8e58",
       "bytes_verified_equal": true,
       "status": "user_supplied"
+    },
+    {
+      "prefix": 23,
+      "description": "Banner Arquivos STL — MakerWorld",
+      "source": "76E18DBF-5973-4B97-916B-6E814F5ADC4D.PNG — enviado pelo usuário",
+      "destination": "public/assets/images/arquivos-stl.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGB",
+      "has_alpha_channel": false,
+      "bytes": 2334468,
+      "sha256_source": "ab269c049db16182b75acca1adef8d56e442a43d5b12a3c8e584917add082edb",
+      "sha256_destination": "ab269c049db16182b75acca1adef8d56e442a43d5b12a3c8e584917add082edb",
+      "bytes_verified_equal": true,
+      "status": "user_supplied"
     }
   ],
   "additional_user_assets": [

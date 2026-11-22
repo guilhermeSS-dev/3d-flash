@@ -16,6 +16,7 @@ import { SectionDivider } from '../../../../shared/components/section-divider/se
 import { HeroSection } from '../../components/hero-section/hero-section';
 import { AboutSection } from '../../components/about-section/about-section';
 import { CoursePreviewSection } from '../../components/course-preview-section/course-preview-section';
+import { StlSection } from '../../components/stl-section/stl-section';
 import { ProductsSection } from '../../components/products-section/products-section';
 import { ContactSection } from '../../components/contact-section/contact-section';
 import { FooterSection } from '../../components/footer-section/footer-section';
@@ -29,6 +30,7 @@ import { ElectricTrail } from '../../components/electric-trail/electric-trail';
     AboutSection,
     CoursePreviewSection,
     ProductsSection,
+    StlSection,
     ContactSection,
     FooterSection,
     SectionDivider,

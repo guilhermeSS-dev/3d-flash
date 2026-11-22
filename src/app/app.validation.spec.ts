@@ -50,7 +50,7 @@ describe('Application acceptance structure', () => {
     },
   );
 
-  it('preserves the five home sections and the footer with non-interactive decorations', async () => {
+  it('preserves the six home sections and the footer with non-interactive decorations', async () => {
     const harness = await RouterTestingHarness.create('/');
     const page = harness.routeNativeElement!;
     expect(Array.from(page.querySelectorAll('section[id]')).map((node) => node.id)).toEqual([
@@ -58,6 +58,7 @@ describe('Application acceptance structure', () => {
       'sobre',
       'curso',
       'produtos',
+      'arquivos-stl',
       'contato',
     ]);
     expect(page.querySelectorAll('footer#rodape')).toHaveLength(1);
@@ -83,6 +84,41 @@ describe('Application acceptance structure', () => {
     expect(link?.rel).toContain('noreferrer');
     expect(products?.querySelector('.catalog-status')).toBeNull();
     expect(products?.textContent).not.toContain('disponibilizado em breve');
+  });
+
+  it.each([
+    ['produtos', 'Indicações 3D Flash'],
+    ['arquivos-stl', 'Arquivos STL'],
+  ])('navigates from the menu to #%s and closes it', async (id, label) => {
+    const harness = await RouterTestingHarness.create('/');
+    const page = harness.routeNativeElement!;
+    page.querySelector<HTMLButtonElement>('.navigation-toggle')!.click();
+    await harness.fixture.whenStable();
+    const link = Array.from(page.querySelectorAll<HTMLAnchorElement>('#site-navigation a')).find(
+      (item) => item.textContent?.trim() === label,
+    )!;
+    expect(page.querySelector('#' + id)?.getAttribute('tabindex')).toBe('-1');
+    link.click();
+    await harness.fixture.whenStable();
+    expect(TestBed.inject(Router).url).toBe('/#' + id);
+    expect(page.querySelector('.navigation-toggle')?.getAttribute('aria-expanded')).toBe('false');
+  });
+
+  it('renders the supplied STL banner and its safe MakerWorld destination', async () => {
+    const harness = await RouterTestingHarness.create('/');
+    const page = harness.routeNativeElement!;
+    expect(page.querySelector('#produtos .section-label')?.textContent).toBe('INDICAÇÕES 3D FLASH');
+    const section = page.querySelector('#arquivos-stl')!;
+    expect(section.querySelector('img')?.getAttribute('src')).toBe(
+      'assets/images/arquivos-stl.png',
+    );
+    const link = section.querySelector('a')!;
+    expect(link.getAttribute('href')).toBe(
+      'https://makerworld.com/en/@gustavonatan?appSharePlatform=copy',
+    );
+    expect(link.target).toBe('_blank');
+    expect(link.rel).toContain('noopener');
+    expect(link.rel).toContain('noreferrer');
   });
 
   it('repeated route navigation never duplicates menus, electric overlays or page headings', async () => {
