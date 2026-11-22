@@ -28,14 +28,6 @@ export const siteAssets = {
       renderAllowed: true,
     },
     {
-      id: 'ro-cabelos',
-      src: 'assets/keychains/ro-cabelos.png',
-      width: 1536,
-      height: 1024,
-      bounds: { x: 490, y: 12, width: 551, height: 994 },
-      renderAllowed: true,
-    },
-    {
       id: 'brasileira-acai',
       src: 'assets/keychains/brasileira-acai.png',
       width: 1199,
@@ -54,11 +46,10 @@ export const siteAssets = {
     {
       id: 'e4kc-motorsport',
       src: 'assets/keychains/e4kc-motorsport.png',
-      status: 'differs-from-mockup',
       width: 1024,
       height: 1536,
       bounds: { x: 339, y: 27, width: 371, height: 1496 },
-      renderAllowed: false,
+      renderAllowed: true,
     },
     {
       id: 'v-motos-racing',
