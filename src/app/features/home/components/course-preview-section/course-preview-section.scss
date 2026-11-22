@@ -142,7 +142,9 @@
 }
 .course-modal-header {
   position: relative;
-  flex: 0 0 clamp(12rem, 28vh, 19rem);
+  flex: 0 0 auto;
+  aspect-ratio: 1672 / 941;
+  max-block-size: 48dvh;
   min-block-size: 0;
   overflow: hidden;
   background: #080808;
@@ -157,19 +159,6 @@
 
   img {
     display: block;
-  }
-
-  .course-modal-banner-backdrop {
-    position: absolute;
-    z-index: -1;
-    inset: -1.5rem;
-    inline-size: calc(100% + 3rem);
-    block-size: calc(100% + 3rem);
-    object-fit: cover;
-    object-position: center;
-    filter: blur(1.25rem) brightness(0.48);
-    transform: scale(1.04);
-    pointer-events: none;
   }
 
   .course-modal-banner-image {
@@ -280,8 +269,9 @@
     transform: none;
   }
   .course-modal-header {
-    flex-basis: min(30dvh, 15rem);
-    flex-shrink: 0;
+    flex-basis: auto;
+    max-block-size: min(32dvh, 15rem);
+    aspect-ratio: 1672 / 941;
   }
   .course-modal-close {
     inset-block-start: max(0.75rem, env(safe-area-inset-top));
