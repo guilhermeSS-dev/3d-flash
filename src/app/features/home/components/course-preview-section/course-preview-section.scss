@@ -10,7 +10,7 @@
 .course-inner {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(10rem, 0.55fr);
+  grid-template-columns: minmax(0, 1fr);
   grid-template-rows: auto auto;
   gap: 1.5rem 2rem;
   align-items: center;
@@ -32,22 +32,6 @@
 
 .accent-text {
   display: block;
-}
-
-.course-product {
-  grid-column: 2;
-  grid-row: 1;
-  justify-self: end;
-  align-self: center;
-  inline-size: min(100%, clamp(10rem, 18vw, 15rem));
-  margin: 0;
-  filter: drop-shadow(0 0 1.25rem var(--color-orange));
-
-  img {
-    display: block;
-    inline-size: 100%;
-    block-size: auto;
-  }
 }
 
 .course-cards {
@@ -141,7 +125,7 @@
 
 @media (max-width: 47.99rem) {
   .course-inner {
-    grid-template-columns: minmax(0, 1fr) minmax(6rem, 0.45fr);
+    grid-template-columns: minmax(0, 1fr);
     gap: 1.25rem 0.75rem;
     padding-block: 1.75rem 2.75rem;
   }
@@ -151,13 +135,6 @@
     grid-row: 1;
     max-inline-size: 34rem;
     padding-block-start: 0;
-  }
-
-  .course-product {
-    grid-column: 2;
-    grid-row: 2;
-    inline-size: clamp(6rem, 30vw, 10rem);
-    margin-inline-end: 0.5rem;
   }
 
   .course-cards {
