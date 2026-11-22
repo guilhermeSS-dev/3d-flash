@@ -21,6 +21,7 @@ interface CourseCard {
   readonly label: string;
   readonly image: string;
   readonly alt: string;
+  readonly panorama: string;
 }
 
 @Component({
@@ -47,15 +48,18 @@ export class CoursePreviewSection {
       label: 'o curso para iniciantes',
       image: siteAssets.courses.beginner,
       alt: 'Banner do curso de impressão 3D para iniciantes',
+      panorama: 'assets/images/courses/iniciante-panorama.png',
     },
     {
       id: 'modelagem',
       label: 'o curso de modelagem',
       image: siteAssets.courses.modeling,
       alt: 'Banner do curso de modelagem 3D',
+      panorama: 'assets/images/courses/modelagem-panorama.png',
     },
   ];
   protected readonly selectedCourseId = signal<CourseId | null>(null);
+  protected readonly panoramaSource = signal('');
   protected readonly selectedCourse = computed(() => {
     const id = this.selectedCourseId();
     return id ? courseCatalog[id] : null;
@@ -67,23 +71,29 @@ export class CoursePreviewSection {
     () => this.courses.find((course) => course.id === this.selectedCourseId())?.alt ?? '',
   );
 
+  /** Only use a panorama after successful decoding. Missing assets fall back to the card artwork. */
+  private async resolvePanorama(courseId: CourseId): Promise<string> {
+    const course = this.courses.find((item) => item.id === courseId);
+    if (!course) return '';
+    const image = new Image();
+    image.src = course.panorama;
+    try {
+      await image.decode();
+      return image.currentSrc || image.src;
+    } catch {
+      return course.image;
+    }
+  }
+
   protected async openCourse(courseId: CourseId, event: MouseEvent): Promise<void> {
     if (this.isTransitioning || this.selectedCourseId()) return;
+    this.isTransitioning = true;
     const trigger = event.currentTarget;
     const source = trigger instanceof HTMLElement ? trigger.querySelector('img') : null;
-    if (!source) {
-      this.selectedCourseId.set(courseId);
-      this.changeDetector.detectChanges();
-      const dialog = this.dialog()?.nativeElement;
-      dialog?.showModal();
-      dialog?.focus({ preventScroll: true });
-      return;
-    }
-
-    this.isTransitioning = true;
     this.originImage = source;
-    const sourceRect = this.getRenderedImageRect(source);
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const sourceRect = source ? this.getRenderedImageRect(source) : null;
+    const panorama = await this.resolvePanorama(courseId);
+    this.panoramaSource.set(panorama);
     this.selectedCourseId.set(courseId);
     this.changeDetector.detectChanges();
 
@@ -92,6 +102,8 @@ export class CoursePreviewSection {
     if (!dialog || !destination) {
       this.isTransitioning = false;
       this.originImage = null;
+      this.selectedCourseId.set(null);
+      this.changeDetector.detectChanges();
       return;
     }
 
@@ -99,34 +111,29 @@ export class CoursePreviewSection {
     dialog.focus({ preventScroll: true });
     this.changeDetector.detectChanges();
     const destinationRect = this.getRenderedImageRect(destination);
-    if (reducedMotion || !sourceRect.width || !destinationRect.width) {
+    if (!source || !sourceRect || this.reducedMotion() || !this.validRect(sourceRect) || !this.validRect(destinationRect)) {
       this.isTransitioning = false;
       return;
     }
 
+    const layer = this.createTransitionLayer(false);
     source.style.visibility = 'hidden';
     destination.style.opacity = '0';
-    const layer = this.createTransitionLayer(false);
-    const movingImage = this.createMovingImage(layer, source, sourceRect);
-    layer.showModal();
-    const animation = movingImage.animate(
-      [
-        this.transformFrame(sourceRect.left, sourceRect.top, 1),
-        this.transformFrame(
-          destinationRect.left,
-          destinationRect.top,
-          destinationRect.width / sourceRect.width,
-        ),
-      ],
-      { duration: this.transitionDuration, easing: this.transitionEasing, fill: 'forwards' },
-    );
-
     try {
-      await animation.finished;
+      const original = this.createMovingImage(layer, source, sourceRect);
+      const panoramic = this.createMovingImage(layer, destination, destinationRect);
+      panoramic.style.opacity = '0';
+      layer.showModal();
+      const endOriginal = this.fitRect(sourceRect.width / sourceRect.height, destinationRect);
+      const beginPanorama = this.fitRect(destinationRect.width / destinationRect.height, sourceRect);
+      await Promise.all([
+        this.animateRect(original, sourceRect, endOriginal, [1, 1, 0], [0, 0.25, 1]),
+        this.animateRect(panoramic, beginPanorama, destinationRect, [0, 0, 1], [0, 0.25, 1]),
+      ]);
     } catch {
-      /* Clean up if interrupted. */
+      // Always reveal the definitive modal even if the animation is interrupted.
     } finally {
-      layer.close();
+      if (layer.open) layer.close();
       layer.remove();
       source.style.visibility = '';
       destination.style.opacity = '';
@@ -136,64 +143,87 @@ export class CoursePreviewSection {
 
   protected async closeCourse(): Promise<void> {
     if (this.isTransitioning || !this.selectedCourseId()) return;
+    this.isTransitioning = true;
     const dialog = this.dialog()?.nativeElement;
     const destination = this.modalBanner()?.nativeElement;
     const source = this.originImage;
-    if (!dialog || !destination || !source) {
+    const sourceRect = source ? this.getRenderedImageRect(source) : null;
+    const destinationRect = destination ? this.getRenderedImageRect(destination) : null;
+    const visibleSource = sourceRect && sourceRect.bottom > 0 && sourceRect.top < innerHeight &&
+      sourceRect.right > 0 && sourceRect.left < innerWidth;
+    if (!dialog || !destination || !source || !sourceRect || !destinationRect ||
+        !visibleSource || this.reducedMotion() || !this.validRect(sourceRect) || !this.validRect(destinationRect)) {
       dialog?.close();
       this.selectedCourseId.set(null);
+      this.panoramaSource.set('');
       this.changeDetector.detectChanges();
-      return;
-    }
-
-    this.isTransitioning = true;
-    const destinationRect = this.getRenderedImageRect(destination);
-    const sourceRect = this.getRenderedImageRect(source);
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reducedMotion || !sourceRect.width || !destinationRect.width) {
-      dialog.close();
-      this.selectedCourseId.set(null);
-      this.changeDetector.detectChanges();
-      this.isTransitioning = false;
       this.originImage = null;
+      this.isTransitioning = false;
       return;
     }
 
     const layer = this.createTransitionLayer(true);
-    const movingImage = this.createMovingImage(layer, destination, destinationRect);
-    destination.style.opacity = '0';
     source.style.visibility = 'hidden';
-    layer.showModal();
-    dialog.close();
-    this.selectedCourseId.set(null);
-    this.changeDetector.detectChanges();
-
-    const imageAnimation = movingImage.animate(
-      [
-        this.transformFrame(destinationRect.left, destinationRect.top, 1),
-        this.transformFrame(
-          sourceRect.left,
-          sourceRect.top,
-          sourceRect.width / destinationRect.width,
-        ),
-      ],
-      { duration: this.transitionDuration, easing: this.transitionEasing, fill: 'forwards' },
-    );
-    const backdropAnimation = layer.animate(
-      [{ backgroundColor: 'rgba(0, 0, 0, 0.72)' }, { backgroundColor: 'rgba(0, 0, 0, 0)' }],
-      { duration: this.transitionDuration, easing: this.transitionEasing, fill: 'forwards' },
-    );
+    destination.style.opacity = '0';
     try {
-      await Promise.all([imageAnimation.finished, backdropAnimation.finished]);
+      const panoramic = this.createMovingImage(layer, destination, destinationRect);
+      const original = this.createMovingImage(layer, source, sourceRect);
+      original.style.opacity = '0';
+      layer.showModal();
+      dialog.close();
+      this.selectedCourseId.set(null);
+      this.changeDetector.detectChanges();
+      const endPanorama = this.fitRect(destinationRect.width / destinationRect.height, sourceRect);
+      const beginOriginal = this.fitRect(sourceRect.width / sourceRect.height, destinationRect);
+      await Promise.all([
+        this.animateRect(panoramic, destinationRect, endPanorama, [1, 0, 0], [0, 0.75, 1]),
+        this.animateRect(original, beginOriginal, sourceRect, [0, 1, 1], [0, 0.75, 1]),
+        layer.animate(
+          [{ backgroundColor: 'rgba(0,0,0,.72)' }, { backgroundColor: 'rgba(0,0,0,0)' }],
+          { duration: this.transitionDuration, easing: this.transitionEasing, fill: 'forwards' },
+        ).finished,
+      ]);
     } catch {
-      /* Clean up even if the browser cancels an animation. */
+      // Restore visibility and state regardless of interruption.
     } finally {
-      layer.close();
+      if (layer.open) layer.close();
       layer.remove();
       source.style.visibility = '';
+      destination.style.opacity = '';
       this.originImage = null;
+      this.panoramaSource.set('');
       this.isTransitioning = false;
     }
+  }
+
+  private reducedMotion(): boolean {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
+  private validRect(rect: DOMRect): boolean {
+    return rect.width > 0 && rect.height > 0;
+  }
+
+  private fitRect(aspect: number, bounds: DOMRect): DOMRect {
+    const width = Math.min(bounds.width, bounds.height * aspect);
+    const height = width / aspect;
+    return new DOMRect(bounds.left + (bounds.width - width) / 2,
+      bounds.top + (bounds.height - height) / 2, width, height);
+  }
+
+  private animateRect(image: HTMLImageElement, from: DOMRect, to: DOMRect,
+    opacity: number[], offset: number[]): Promise<Animation> {
+    const animation = image.animate([
+      { transform: this.transformFrame(from.left, from.top, 1).transform, opacity: opacity[0], offset: offset[0] },
+      { transform: this.transformFrame(
+          from.left + (to.left - from.left) * 0.25,
+          from.top + (to.top - from.top) * 0.25,
+          1 + (to.width / from.width - 1) * 0.25,
+        ).transform, opacity: opacity[1], offset: offset[1] },
+      { transform: this.transformFrame(to.left, to.top, to.width / from.width).transform,
+        opacity: opacity[2], offset: offset[2] },
+    ], { duration: this.transitionDuration, easing: this.transitionEasing, fill: 'forwards' });
+    return animation.finished;
   }
 
   protected onDialogKeydown(event: KeyboardEvent): void {
