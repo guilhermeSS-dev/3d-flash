@@ -287,6 +287,21 @@
       "sha256_destination": "c98718f54a4e2b0d1158cc921000101824808f446f927aaeac079fbfe43bfe32",
       "bytes_verified_equal": true,
       "status": "user_supplied"
+    },
+    {
+      "prefix": 21,
+      "description": "Banner atualizado do curso Modelagem / Personalizados",
+      "source": "8A1C4744-10A5-40FA-A94D-934FDB3F6F83.PNG — enviado pelo usuário",
+      "destination": "public/assets/images/modelagem.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGB",
+      "has_alpha_channel": false,
+      "bytes": 2365410,
+      "sha256_source": "e5a69fbfb4aa080141de4698ae0d712514750eac56de022d7c0afc8f37671222",
+      "sha256_destination": "e5a69fbfb4aa080141de4698ae0d712514750eac56de022d7c0afc8f37671222",
+      "bytes_verified_equal": true,
+      "status": "user_supplied"
     }
   ],
   "additional_user_assets": [

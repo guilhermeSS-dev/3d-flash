@@ -6,7 +6,7 @@ export const siteAssets = {
   qrStand: 'assets/images/plaquinha-qr.png',
   courses: {
     beginner: 'assets/images/iniciante.png',
-    modeling: 'assets/images/modelagem.jpeg',
+    modeling: 'assets/images/modelagem.png',
   },
   productsBanner: 'assets/images/produtos_banner.jpeg',
   phoneCase: {
