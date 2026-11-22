@@ -37,7 +37,7 @@ export class CoursePreviewSection {
   private readonly modalBanner = viewChild<ElementRef<HTMLImageElement>>('modalBannerImage');
   private originImage: HTMLImageElement | null = null;
   private isTransitioning = false;
-  private readonly transitionDuration = 520;
+  private readonly transitionDuration = 750;
   private readonly transitionEasing = 'cubic-bezier(0.22, 0.75, 0.25, 1)';
 
   protected readonly assets = siteAssets;
