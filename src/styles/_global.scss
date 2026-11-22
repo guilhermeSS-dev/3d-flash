@@ -47,8 +47,11 @@ a {
   outline-offset: 5px;
 }
 
-:is(section, footer)[tabindex='-1']:focus-visible {
-  outline-offset: -3px;
+/* Sections receive programmatic focus after anchor navigation.
+   Avoid drawing a large focus rectangle around entire content bands;
+   interactive controls retain their visible keyboard focus indicator. */
+:is(section, footer)[tabindex='-1']:focus {
+  outline: none;
 }
 
 .sr-only {
