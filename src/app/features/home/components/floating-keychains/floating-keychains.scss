@@ -28,10 +28,6 @@
   inset: 12% auto auto 4%;
   rotate: 13deg;
 }
-.keychain--ro-cabelos {
-  inset: 12% auto auto 24%;
-  rotate: 10deg;
-}
 .keychain--brasileira-acai {
   inset: 37% auto auto 3%;
   rotate: -13deg;
@@ -43,9 +39,8 @@
   inline-size: 16%;
 }
 .keychain--e4kc-motorsport {
-  inset: 59% auto auto 7%;
-  rotate: 70deg;
-  inline-size: 7%;
+  inset: 12% auto auto 24%;
+  rotate: 10deg;
 }
 .keychain--v-motos-racing {
   inset: 66% auto auto 5%;
@@ -57,16 +52,13 @@
     inset-block-start: 22%;
     inset-inline-start: 5%;
   }
-  .keychain--ro-cabelos {
-    inset-block-start: 22%;
-    inset-inline-start: 25%;
-  }
   .keychain--brasileira-acai,
   .keychain--leca-tintas {
     inset-block-start: 46%;
   }
   .keychain--e4kc-motorsport {
-    inset-block-start: 65%;
+    inset-block-start: 22%;
+    inset-inline-start: 25%;
   }
   .keychain--v-motos-racing {
     inset-block-start: 71%;
