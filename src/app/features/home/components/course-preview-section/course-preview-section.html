@@ -8,69 +8,108 @@
     <div class="course-copy" data-keychain-obstacle="course-copy">
       <p class="section-label">CURSO 3D FLASH</p>
       <h2 id="course-preview-title" class="display-heading">
-        Aprenda a transformar
-        <span class="accent-text">ideias em criações.</span>
+        Aprenda a transformar <span class="accent-text">ideias em criações.</span>
       </h2>
     </div>
-
     <div class="course-cards" aria-label="Cursos disponíveis">
-      <a
-        class="course-card"
-        routerLink="/curso/iniciante"
-        aria-label="Conheça o curso para iniciantes"
-      >
-        <span class="course-card-image">
-          <img
-            [src]="assets.courses.beginner"
-            alt="Banner do curso de impressão 3D para iniciantes"
-            width="1254"
-            height="1254"
-            loading="lazy"
-            decoding="async"
-          />
-        </span>
-        <span class="course-card-action">
-          <span>Conheça o curso</span>
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-            <path
-              d="M4 12h15m-6-6 6 6-6 6"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+      @for (course of courses; track course.id) {
+        <button
+          class="course-card"
+          type="button"
+          [attr.aria-label]="'Conheça ' + course.label"
+          (click)="openCourse(course.id, $event)"
+        >
+          <span class="course-card-image">
+            <img
+              [src]="course.image"
+              [alt]="course.alt"
+              width="1254"
+              height="1254"
+              loading="lazy"
+              decoding="async"
             />
-          </svg>
-        </span>
-      </a>
-
-      <a
-        class="course-card"
-        routerLink="/curso/modelagem"
-        aria-label="Conheça o curso de modelagem"
-      >
-        <span class="course-card-image">
-          <img
-            [src]="assets.courses.modeling"
-            alt="Banner do curso de modelagem 3D"
-            width="1254"
-            height="1254"
-            loading="lazy"
-            decoding="async"
-          />
-        </span>
-        <span class="course-card-action">
-          <span>Conheça o curso</span>
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-            <path
-              d="M4 12h15m-6-6 6 6-6 6"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </span>
-      </a>
+          </span>
+          <span class="course-card-action">
+            <span>Conheça o curso</span>
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+              <path
+                d="M4 12h15m-6-6 6 6-6 6"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+        </button>
+      }
     </div>
   </div>
+
+  @if (selectedCourse(); as course) {
+    <dialog
+      #courseDialog
+      class="course-modal"
+      aria-labelledby="course-modal-title"
+      (click)="onDialogClick($event)"
+      (cancel)="onDialogCancel($event)"
+    >
+      <header class="course-modal-header">
+        <div class="course-modal-banner">
+          <img
+            class="course-modal-banner-backdrop"
+            [src]="selectedCourseImage()"
+            alt=""
+            aria-hidden="true"
+            width="1254"
+            height="1254"
+            decoding="async"
+          />
+          <img
+            #modalBannerImage
+            class="course-modal-banner-image"
+            [src]="selectedCourseImage()"
+            [alt]="selectedCourseAlt()"
+            width="1254"
+            height="1254"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </div>
+        <button
+          class="course-modal-close"
+          type="button"
+          aria-label="Fechar detalhes do curso"
+          (click)="closeCourse()"
+        >
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+            <path
+              d="m6 6 12 12M18 6 6 18"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+      </header>
+      <div class="course-modal-scroll">
+        <div class="course-modal-content">
+          <app-course-info [presentation]="course.presentation" />
+          <div class="enrollment-placement">
+            <app-enrollment-button [destination]="config.links.hotmart" />
+          </div>
+          <section class="course-modules" aria-labelledby="course-modal-title">
+            <div class="modules-header">
+              <h2 id="course-modal-title">Módulos do curso</h2>
+              <p class="provisional-note">Conteúdo programático em atualização.</p>
+            </div>
+            <app-course-accordion [modules]="course.modules" />
+          </section>
+          <div class="enrollment-placement enrollment-placement--bottom">
+            <app-enrollment-button [destination]="config.links.hotmart" />
+          </div>
+        </div>
+      </div>
+    </dialog>
+  }
 </section>
