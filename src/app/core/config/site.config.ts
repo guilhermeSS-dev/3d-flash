@@ -7,6 +7,12 @@ export const siteConfig = {
     description: 'Impressão 3D',
     concept: 'Da imaginação à realidade',
   },
-  links: { instagram: '', whatsapp: '', hotmart: '', productCatalog: '', course: '/curso' },
+  links: {
+    instagram: '',
+    whatsapp: '',
+    hotmart: '',
+    productCatalog: 'https://collshp.com/3dflash.oficial?view=storefront',
+    course: '/curso',
+  },
   course: { name: '', duration: '', introduction: '' },
 } as const satisfies SiteConfig;

@@ -70,14 +70,19 @@ describe('Application acceptance structure', () => {
     expect(overlay.querySelector('svg')!.getAttribute('focusable')).toBe('false');
   });
 
-  it('renders the Shopee products banner and keeps its link unavailable until configured', async () => {
+  it('renders the Shopee products banner as a safe storefront link without a pending notice', async () => {
     const harness = await RouterTestingHarness.create('/');
     const products = harness.routeNativeElement?.querySelector('#produtos');
     expect(products?.querySelector('img')?.getAttribute('src')).toBe(
       'assets/images/produtos_banner.png',
     );
-    expect(products?.querySelector('a[href]')).toBeNull();
-    expect(products?.textContent).toContain('link do catálogo será disponibilizado em breve');
+    const link = products?.querySelector<HTMLAnchorElement>('a.products-banner');
+    expect(link?.getAttribute('href')).toBe('https://collshp.com/3dflash.oficial?view=storefront');
+    expect(link?.target).toBe('_blank');
+    expect(link?.rel).toContain('noopener');
+    expect(link?.rel).toContain('noreferrer');
+    expect(products?.querySelector('.catalog-status')).toBeNull();
+    expect(products?.textContent).not.toContain('disponibilizado em breve');
   });
 
   it('repeated route navigation never duplicates menus, electric overlays or page headings', async () => {

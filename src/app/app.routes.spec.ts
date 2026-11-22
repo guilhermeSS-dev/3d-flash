@@ -61,6 +61,7 @@ describe('Application routing', () => {
       '.hero-copy a[href="/#curso"]',
     );
     expect(links?.length).toBe(1);
+    expect(links?.[0].textContent).toContain('Conheça nossos cursos');
     links?.[0]?.click();
     await harness.fixture.whenStable();
     expect(router.url).toBe('/#curso');
