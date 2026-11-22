@@ -332,6 +332,36 @@
       "sha256_destination": "ab269c049db16182b75acca1adef8d56e442a43d5b12a3c8e584917add082edb",
       "bytes_verified_equal": true,
       "status": "user_supplied"
+    },
+    {
+      "prefix": 24,
+      "description": "Banner horizontal — curso Iniciante",
+      "source": "9D37B5EA-3A4D-429F-AAA9-B3FBE68A5EBB.PNG — enviado pelo usuário",
+      "destination": "public/assets/images/banner-iniciante-horizontal.png",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "has_alpha_channel": false,
+      "bytes": 2129468,
+      "sha256_source": "f29b58a0860b27f6c446039278e2ea505eaac96ccf64cbadcd5efc2dfbafadb8",
+      "sha256_destination": "f29b58a0860b27f6c446039278e2ea505eaac96ccf64cbadcd5efc2dfbafadb8",
+      "bytes_verified_equal": true,
+      "status": "user_supplied"
+    },
+    {
+      "prefix": 25,
+      "description": "Banner horizontal — curso Modelagem / Personalizados",
+      "source": "8C2C857A-F173-4882-9BFC-98F6154AC512.PNG — enviado pelo usuário",
+      "destination": "public/assets/images/banner-modelagem-horizontal.png",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "has_alpha_channel": false,
+      "bytes": 2333249,
+      "sha256_source": "04ebfb2da1237ca273a59fdb97c7eced87efe932b81cb520f0e7c7d1c1b3b42a",
+      "sha256_destination": "04ebfb2da1237ca273a59fdb97c7eced87efe932b81cb520f0e7c7d1c1b3b42a",
+      "bytes_verified_equal": true,
+      "status": "user_supplied"
     }
   ],
   "additional_user_assets": [
