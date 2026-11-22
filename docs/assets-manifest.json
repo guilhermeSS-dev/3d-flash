@@ -272,6 +272,21 @@
       "bytes_verified_equal": false,
       "status": "user_supplied_background_removed",
       "processing": "Remoção do fundo branco via image_gen; PNG com transparência real. O arquivo JPEG anterior permanece preservado."
+    },
+    {
+      "prefix": 20,
+      "description": "Banner atualizado do curso Iniciante",
+      "source": "157F98BD-6290-4A88-BDCB-B6475F02AA77.PNG — enviado pelo usuário",
+      "destination": "public/assets/images/iniciante.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGB",
+      "has_alpha_channel": false,
+      "bytes": 2220771,
+      "sha256_source": "c98718f54a4e2b0d1158cc921000101824808f446f927aaeac079fbfe43bfe32",
+      "sha256_destination": "c98718f54a4e2b0d1158cc921000101824808f446f927aaeac079fbfe43bfe32",
+      "bytes_verified_equal": true,
+      "status": "user_supplied"
     }
   ],
   "additional_user_assets": [
