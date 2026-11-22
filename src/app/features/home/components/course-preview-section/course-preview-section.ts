@@ -121,11 +121,11 @@ export class CoursePreviewSection {
     destination.style.opacity = '0';
     try {
       const original = this.createMovingImage(layer, source, sourceRect);
-      const panoramic = this.createMovingImage(layer, destination, destinationRect);
-      panoramic.style.opacity = '0';
-      layer.showModal();
       const endOriginal = this.fitRect(sourceRect.width / sourceRect.height, destinationRect);
       const beginPanorama = this.fitRect(destinationRect.width / destinationRect.height, sourceRect);
+      const panoramic = this.createMovingImage(layer, destination, beginPanorama);
+      panoramic.style.opacity = '0';
+      layer.showModal();
       await Promise.all([
         this.animateRect(original, sourceRect, endOriginal, [1, 1, 0], [0, 0.25, 1]),
         this.animateRect(panoramic, beginPanorama, destinationRect, [0, 0, 1], [0, 0.25, 1]),
@@ -167,14 +167,14 @@ export class CoursePreviewSection {
     destination.style.opacity = '0';
     try {
       const panoramic = this.createMovingImage(layer, destination, destinationRect);
-      const original = this.createMovingImage(layer, source, sourceRect);
+      const beginOriginal = this.fitRect(sourceRect.width / sourceRect.height, destinationRect);
+      const original = this.createMovingImage(layer, source, beginOriginal);
       original.style.opacity = '0';
       layer.showModal();
       dialog.close();
       this.selectedCourseId.set(null);
       this.changeDetector.detectChanges();
       const endPanorama = this.fitRect(destinationRect.width / destinationRect.height, sourceRect);
-      const beginOriginal = this.fitRect(sourceRect.width / sourceRect.height, destinationRect);
       await Promise.all([
         this.animateRect(panoramic, destinationRect, endPanorama, [1, 0, 0], [0, 0.75, 1]),
         this.animateRect(original, beginOriginal, sourceRect, [0, 1, 1], [0, 0.75, 1]),
