@@ -220,7 +220,7 @@ export class CoursePreviewSection {
           from.top + (to.top - from.top) * 0.25,
           1 + (to.width / from.width - 1) * 0.25,
         ), opacity: opacity[1], offset: offset[1] },
-      { transform: this.transformFrame(to.left, to.top, to.width / from.width).transform,
+      { transform: this.transformFrame(to.left, to.top, to.width / from.width),
         opacity: opacity[2], offset: offset[2] },
     ], { duration: this.transitionDuration, easing: this.transitionEasing, fill: 'forwards' });
     return animation.finished;
