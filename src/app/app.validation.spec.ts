@@ -74,7 +74,7 @@ describe('Application acceptance structure', () => {
     const harness = await RouterTestingHarness.create('/');
     const products = harness.routeNativeElement?.querySelector('#produtos');
     expect(products?.querySelector('img')?.getAttribute('src')).toBe(
-      'assets/images/produtos_banner.jpeg',
+      'assets/images/produtos_banner.png',
     );
     expect(products?.querySelector('a[href]')).toBeNull();
     expect(products?.textContent).toContain('link do catálogo será disponibilizado em breve');

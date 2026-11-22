@@ -8,7 +8,7 @@ export const siteAssets = {
     beginner: 'assets/images/iniciante.png',
     modeling: 'assets/images/modelagem.png',
   },
-  productsBanner: 'assets/images/produtos_banner.jpeg',
+  productsBanner: 'assets/images/produtos_banner.png',
   phoneCase: {
     digital: 'assets/images/capinha-digital.png',
     physical: 'assets/images/capinha-fisica.png',
