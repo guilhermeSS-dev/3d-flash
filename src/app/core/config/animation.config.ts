@@ -10,7 +10,7 @@ export const animationConfig = {
   // Provisional tuning values: validate during stage 6.
   keychains: {
     scrub: 0.65,
-    floatDistancePx: 5,
+    floatDistancePx: 8,
     floatRotationDegrees: 2,
     floatHalfCycleMinSeconds: 2.7,
     floatHalfCycleMaxSeconds: 3.9,
