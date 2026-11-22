@@ -50,6 +50,9 @@
     <dialog
       #courseDialog
       class="course-modal"
+      tabindex="-1"
+      (keydown)="onDialogKeydown($event)"
+      (pointerdown)="onDialogPointerDown($event)"
       aria-labelledby="course-modal-title"
       (click)="onDialogClick($event)"
       (cancel)="onDialogCancel($event)"

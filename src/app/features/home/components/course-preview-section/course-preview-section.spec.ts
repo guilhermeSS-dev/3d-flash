@@ -16,6 +16,8 @@ describe('Course banner modal', () => {
       configurable: true,
       value(this: HTMLDialogElement) {
         this.setAttribute('open', '');
+        // Model the native dialog's initial focus on its first control.
+        this.querySelector<HTMLElement>('button')?.focus();
       },
     });
     Object.defineProperty(prototype, 'close', {
@@ -63,6 +65,46 @@ describe('Course banner modal', () => {
       );
     },
   );
+
+  it('focuses the dialog without scrolling or marking the close button on opening', async () => {
+    const fixture = TestBed.createComponent(CoursePreviewSection);
+    await fixture.whenStable();
+    const root = fixture.nativeElement as HTMLElement;
+    const focus = vi.spyOn(HTMLElement.prototype, 'focus');
+    try {
+      root.querySelector<HTMLButtonElement>('.course-card')!.click();
+      await fixture.whenStable();
+      const dialog = root.querySelector<HTMLDialogElement>('dialog')!;
+      expect(document.activeElement).toBe(dialog);
+      expect(focus).toHaveBeenCalledWith({ preventScroll: true });
+      expect(dialog.classList.contains('course-modal--keyboard')).toBe(false);
+      expect(document.activeElement).not.toBe(dialog.querySelector('.course-modal-close'));
+    } finally {
+      focus.mockRestore();
+    }
+  });
+
+  it('shows keyboard focus only after Tab and clears it on pointer input across child controls', async () => {
+    const fixture = TestBed.createComponent(CoursePreviewSection);
+    await fixture.whenStable();
+    const root = fixture.nativeElement as HTMLElement;
+    root.querySelector<HTMLButtonElement>('.course-card')!.click();
+    await fixture.whenStable();
+    const dialog = root.querySelector<HTMLDialogElement>('dialog')!;
+    const close = dialog.querySelector<HTMLButtonElement>('.course-modal-close')!;
+    const module = dialog.querySelector<HTMLButtonElement>('.module-trigger')!;
+    for (const control of [close, module]) {
+      control.dispatchEvent(
+        new KeyboardEvent('keydown', { key: 'Tab', shiftKey: true, bubbles: true }),
+      );
+      expect(dialog.classList.contains('course-modal--keyboard')).toBe(true);
+      control.dispatchEvent(new Event('pointerdown', { bubbles: true }));
+      expect(dialog.classList.contains('course-modal--keyboard')).toBe(false);
+    }
+    module.click();
+    await fixture.whenStable();
+    expect(module.getAttribute('aria-expanded')).toBe('true');
+  });
 
   it.each(['cancel', 'click'])(
     'closes on native %s without leaving the course selected',

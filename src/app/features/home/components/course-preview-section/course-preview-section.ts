@@ -74,7 +74,9 @@ export class CoursePreviewSection {
     if (!source) {
       this.selectedCourseId.set(courseId);
       this.changeDetector.detectChanges();
-      this.dialog()?.nativeElement.showModal();
+      const dialog = this.dialog()?.nativeElement;
+      dialog?.showModal();
+      dialog?.focus({ preventScroll: true });
       return;
     }
 
@@ -94,6 +96,7 @@ export class CoursePreviewSection {
     }
 
     dialog.showModal();
+    dialog.focus({ preventScroll: true });
     this.changeDetector.detectChanges();
     const destinationRect = this.getRenderedImageRect(destination);
     if (reducedMotion || !sourceRect.width || !destinationRect.width) {
@@ -193,6 +196,15 @@ export class CoursePreviewSection {
     }
   }
 
+  protected onDialogKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Tab')
+      (event.currentTarget as HTMLElement).classList.add('course-modal--keyboard');
+  }
+
+  protected onDialogPointerDown(event: PointerEvent): void {
+    (event.currentTarget as HTMLElement).classList.remove('course-modal--keyboard');
+  }
+
   protected onDialogClick(event: MouseEvent): void {
     if (event.target === event.currentTarget) void this.closeCourse();
   }
@@ -216,6 +228,7 @@ export class CoursePreviewSection {
       border: '0',
       overflow: 'visible',
       pointerEvents: 'none',
+      outline: 'none',
       backgroundColor: withBackdrop ? 'rgba(0, 0, 0, 0.72)' : 'transparent',
       backdropFilter: withBackdrop ? 'blur(8px)' : 'none',
     });
