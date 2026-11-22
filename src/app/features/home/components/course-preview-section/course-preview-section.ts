@@ -48,14 +48,14 @@ export class CoursePreviewSection {
       label: 'o curso para iniciantes',
       image: siteAssets.courses.beginner,
       alt: 'Banner do curso de impressão 3D para iniciantes',
-      panorama: 'assets/images/courses/iniciante-panorama.png',
+      panorama: 'assets/images/banner-iniciante-horizontal.png',
     },
     {
       id: 'modelagem',
       label: 'o curso de modelagem',
       image: siteAssets.courses.modeling,
       alt: 'Banner do curso de modelagem 3D',
-      panorama: 'assets/images/courses/modelagem-panorama.png',
+      panorama: 'assets/images/banner-modelagem-horizontal.png',
     },
   ];
   protected readonly selectedCourseId = signal<CourseId | null>(null);
@@ -214,12 +214,12 @@ export class CoursePreviewSection {
   private animateRect(image: HTMLImageElement, from: DOMRect, to: DOMRect,
     opacity: number[], offset: number[]): Promise<Animation> {
     const animation = image.animate([
-      { transform: this.transformFrame(from.left, from.top, 1).transform, opacity: opacity[0], offset: offset[0] },
+      { transform: this.transformFrame(from.left, from.top, 1), opacity: opacity[0], offset: offset[0] },
       { transform: this.transformFrame(
           from.left + (to.left - from.left) * 0.25,
           from.top + (to.top - from.top) * 0.25,
           1 + (to.width / from.width - 1) * 0.25,
-        ).transform, opacity: opacity[1], offset: offset[1] },
+        ), opacity: opacity[1], offset: offset[1] },
       { transform: this.transformFrame(to.left, to.top, to.width / from.width).transform,
         opacity: opacity[2], offset: offset[2] },
     ], { duration: this.transitionDuration, easing: this.transitionEasing, fill: 'forwards' });
@@ -328,7 +328,7 @@ export class CoursePreviewSection {
     return image;
   }
 
-  private transformFrame(x: number, y: number, scale: number): Keyframe {
-    return { transform: `translate3d(${x}px, ${y}px, 0) scale(${scale})` };
+  private transformFrame(x: number, y: number, scale: number): string {
+    return `translate3d(${x}px, ${y}px, 0) scale(${scale})`;
   }
 }
