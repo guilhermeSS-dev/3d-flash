@@ -5,7 +5,7 @@ export const siteAssets = {
   menu: 'assets/icons/menu-raios.png',
   qrStand: 'assets/images/plaquinha-qr.png',
   courses: {
-    beginner: 'assets/images/iniciante.jpeg',
+    beginner: 'assets/images/iniciante.png',
     modeling: 'assets/images/modelagem.jpeg',
   },
   productsBanner: 'assets/images/produtos_banner.jpeg',
