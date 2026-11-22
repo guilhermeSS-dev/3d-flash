@@ -5,6 +5,25 @@
     <title>3D Flash — Impressão 3D</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="3D Flash — Impressão 3D. Da imaginação à realidade." />
+    <script>
+      // On a homepage reload, Safari may restore an old scroll offset after Angular starts.
+      // Leave normal navigation, deep links and browser history behavior unchanged.
+      (() => {
+        const navigation = performance.getEntriesByType('navigation')[0];
+        const isReload = navigation && navigation.type === 'reload';
+        const isHome = !location.hash || location.hash === '#/' || location.hash === '#';
+        if (!isReload || !isHome) return;
+
+        history.scrollRestoration = 'manual';
+        const resetScroll = () => window.scrollTo(0, 0);
+        resetScroll();
+        document.addEventListener('DOMContentLoaded', resetScroll, { once: true });
+        window.addEventListener('pageshow', () => {
+          resetScroll();
+          requestAnimationFrame(() => requestAnimationFrame(resetScroll));
+        }, { once: true });
+      })();
+    </script>
   </head>
   <body>
     <app-root></app-root>
