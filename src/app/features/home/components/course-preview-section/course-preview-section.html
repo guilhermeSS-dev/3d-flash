@@ -60,21 +60,12 @@
       <header class="course-modal-header">
         <div class="course-modal-banner">
           <img
-            class="course-modal-banner-backdrop"
-            [src]="selectedCourseImage()"
-            alt=""
-            aria-hidden="true"
-            width="1254"
-            height="1254"
-            decoding="async"
-          />
-          <img
             #modalBannerImage
             class="course-modal-banner-image"
-            [src]="selectedCourseImage()"
+            [src]="panoramaSource() || selectedCourseImage()"
             [alt]="selectedCourseAlt()"
-            width="1254"
-            height="1254"
+            width="1672"
+            height="941"
             fetchpriority="high"
             decoding="async"
           />
